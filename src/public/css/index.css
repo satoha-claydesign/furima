@@ -1,0 +1,229 @@
+.todo__alert--success {
+    padding: 10px 30px;
+    border-color: #badbcc;
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.todo__alert--danger {
+    padding: 10px 0;
+    border-color: #f5c2c7;
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+.todo__alert--danger ul {
+    margin: 0;
+}
+
+.item__inner {
+    margin: 0 auto;
+    padding: 30px 15px;
+    max-width: 1230px;
+}
+
+.item__tab {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 10px 140px;
+    border-bottom: #ddd solid 1px;
+}
+.item__tab>p {
+    width: 20%;
+    margin-bottom: 0;
+    padding-top: 20px;
+}
+
+.item__tab-recommend {
+    color: #ff0000;
+    cursor: pointer;
+}
+
+.item__tab-mypage a {
+    text-decoration: none;
+    cursor: pointer;
+    color: #000;
+}
+
+/* .product__title>h2{
+    font-size: 30px;
+    font-weight: bold;
+} */
+
+/* .product__add-button, .product__search-button {
+    padding: 10px;
+    width: 200px;
+    height: 48px;
+    border: none;
+    border-radius: 3px;
+    background: #f7d656;
+    color: #000;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: #ddd 2px 2px 4px;
+} */
+
+/* .product__search-button{
+    width: 90%;
+}
+a.product__add-button {
+    text-align: center;
+    text-decoration: none;
+    margin-right: 34px;
+} */
+
+.item__content {
+    display: flex;
+}
+/* カード表示 */
+
+.flex__item {
+    display: flex;
+    max-width: 1200px;
+    flex-wrap: wrap;
+    gap: 2%;
+}
+
+.item__card-box {
+    width: 23%;
+    margin: 10px 0 40px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+}
+
+.card__img img {
+    width: 100%;
+}
+
+.card__content {
+    padding: 15px;
+}
+
+.tag {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+.card__tag {
+    color: #000;
+    margin: 0;
+}
+
+.card__price {
+    color: #888888;
+}
+
+/* ページネーション*/
+
+.page__parts {
+    text-align: center;
+}
+
+.page__parts>nav>.flex.flex-1,
+.page__parts>nav p.text-sm.leading-5 {
+    display: none;
+}
+
+.page__parts>nav span.relative.z-0.inline-flex>span {
+    background-color: #f7d656;
+    color: white;
+    padding: 7px 4px 7px 8px;
+    border-radius: 15px;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.page__parts>nav span.relative.z-0.inline-flex>span>span {
+    color: white;
+}
+
+.page__parts>nav span.relative.z-0.inline-flex a.relative.inline-flex,
+.page__parts>nav span.relative.z-0.inline-flex>span:first-child,
+.page__parts>nav span.relative.z-0.inline-flex>span:last-child {
+    background-color: white;
+    color: #8b7969;
+    padding: 6px 4px 6px 8px;
+    border-radius: 15px;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.page__parts>nav span.relative.z-0.inline-flex>span:first-child,
+.page__parts>nav span.relative.z-0.inline-flex a.relative.inline-flex:last-child,
+.page__parts>nav span.relative.z-0.inline-flex a.relative.inline-flex:first-child,
+.page__parts>nav span.relative.z-0.inline-flex>span:last-child {
+    padding: 6px 0px 6px 0px;
+}
+
+svg.w-5.h-5 {
+    /*paginateメソッドの矢印の大きさ調整のために追加*/
+    width: 28px;
+    height: 27px;
+}
+
+/* 汎用 */
+/* .todo__content {
+    margin: 0 auto;
+    padding: 30px 15px;
+    max-width: 1230px;
+} */
+
+.section__title {
+    margin: 0 auto;
+    width: 70%;
+}
+
+.create-form,
+.search-form {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    width: 70%;
+    text-align: center;
+}
+
+.create-form__item{
+    display: flex;
+    width: 70%;
+}
+
+/* .create-form__item-input,
+.search-form__item-input {
+    margin-right: 10px;
+    padding: 10px;
+    width: 90%;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+} */
+
+.create-form__item-select,
+.search-form__item-select {
+    padding: 10px;
+    width: 30%;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    appearance: none;
+}
+
+.create-form__button,
+.search-form__button {
+    width: 20%;
+}
+
+.create-form__button-submit,
+.search-form__button-submit {
+    padding: 10px;
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 3px;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+}

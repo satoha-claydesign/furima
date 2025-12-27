@@ -1,0 +1,114 @@
+h1 {
+    display: none;
+}
+
+.show__inner {
+    width: 700px;
+    margin: 60px auto;
+}
+
+.show-group {
+    color: #9b9b9b;
+}
+
+.show__image-info label {
+    padding: 5px 10px;
+    background-color: #d6d7d7;
+    cursor: pointer;
+    border: #777 solid 0.5px;
+    font-size: 14px;
+}
+
+.show__image-info label:hover {
+    opacity: 0.8;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.show__info-title {
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.show__info-title:first-child {
+    margin-top: 0;
+}
+
+.show__info-input {
+    width: 100%;
+    height: 50px;
+    color: #b5b4b4;
+    font-size: 16px;
+}
+
+.show__input--checkbox {
+    font-size: 20px;
+    margin-right: 16px;
+}
+
+.show-checkbox {
+    transform: scale(1.2);
+    border-radius: 5px;
+    margin-right: 4px;
+
+}
+
+.show__input--checkbox label {
+    margin-right: 16px;
+}
+
+.show__description {
+    margin-top: 40px;
+}
+
+.description-box {
+    width: 100%;
+    height: 180px;
+}
+
+.show-form__btn-inner {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+    gap: 32px;
+}
+
+.btn {
+    display: block;
+    border: none;
+    color: #FFF;
+    font-size: 16px;
+    padding: 10px;
+    width: 200px;
+    height: 48px;
+    border-radius: 3px;
+    background: #f7d656;
+    color: #000;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 2px 2px 4px #b5b4b4;
+}
+
+.show-form__back-btn {
+    text-decoration: none;
+    background-color: #b5b4b4;
+}
+
+.form__error, .color-red {
+    color: red;
+}
+
+.form__required {
+    background-color: red;
+    padding: 5px;
+    margin-left: 10px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.color-red {
+    margin-left: 10px;
+    font-size: 14px;
+}
