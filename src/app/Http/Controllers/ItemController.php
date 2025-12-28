@@ -17,6 +17,14 @@ class ItemController extends Controller
         return view('index', ['items' => $items],['categories' => $categories]);
     }
 
+    public function indexLogin()
+    {
+        $categories = Category::all();
+        $items = Item::all();
+        $conditions = config('condition');
+        return view('index', ['items' => $items],['categories' => $categories]);
+    }
+
     public function show($id)
     {
         $item = Item::find($id); // または Post::find($id);

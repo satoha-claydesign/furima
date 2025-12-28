@@ -28,8 +28,7 @@ h1 {
 
 .show-group {
     display: flex;
-    justify-content: flex-start;
-    color: #9b9b9b;
+    justify-content: center;
 }
 
 .show__image {
@@ -40,36 +39,63 @@ h1 {
     max-width: 90%;
 }
 
-.show__image-info {
-    margin-top: 10px;
+
+.show__info-title {
+    font-size: 24px;
+    margin-top: 20px;
+    
 }
 
-.show__image-info label {
-    padding: 5px 10px;
-    background-color: #d6d7d7;
-    cursor: pointer;
-    border: #777 solid 0.5px;
+h2.show__info-title {
+    font-size: 30px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.show__info-brand {
+    margin-top: 4px;
     font-size: 14px;
 }
 
-.show__image-info label:hover {
-    opacity: 0.8;
+.show__info-price {
+    font-size: 24px;
 }
 
-input[type="file"] {
-    display: none;
+.show__info-price>span {
+    font-size: 16px;
 }
 
-.show__info-title {
-    font-size: 18px;
-    margin-top: 20px;
+.show__info-icons {
+    display: flex;
+    gap: 10%;
+    margin-left: 20px;
+    align-items: flex-end;
 }
 
-.show__info-title:first-child {
-    margin-top: 0;
+.show__likes, .show__comment {
+    text-align: center;
 }
 
-.show__info-input {
+.show__form__likes-mark, .show__form__comment-mark {
+    width: 30px;
+    height: 30px;
+}
+
+.show__form__comment-mark {
+    margin-bottom: 4px;
+}
+
+button.show__form__likes {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.show__info-icons p {
+    font-size: 12px;
+}
+
+/* .show__info-input {
     width: 500px;
     height: 50px;
     color: #b5b4b4;
@@ -90,40 +116,57 @@ input[type="file"] {
 
 .show__input--checkbox label{
     margin-right: 16px;
-}
+} */
 
-.show__description {
-    margin-top: 40px;
-}
-.description-box {
-    width: 100%;
-    height: 180px;
-}
 
 .show-form__btn-inner {
     display: flex;
     justify-content: center;
-    margin-top: 32px;
     gap: 32px;
 }
 .btn {
     display: block;
     border: none;
-    color: #FFF;
     font-size: 16px;
     padding: 10px;
-    width: 200px;
-    height: 48px;
+    width: 480px;
+    height: 42px;
     border-radius: 3px;
-    background: #f7d656;
-    color: #000;
+    background: #ff5555;
+    color: #fff;
     cursor: pointer;
     text-align: center;
     box-shadow: 2px 2px 4px #b5b4b4;
 }
-.show-form__back-btn {
-    text-decoration: none;
-    background-color: #b5b4b4;
+
+.show__info-description, .show__info-category {
+    margin-bottom: 50px;
+}
+
+.show__info-category dl{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.show__info-category dt {
+    width: 30%;
+    /* padding-bottom: 20px; */
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.show__info-category dd {
+    width: 70%;
+    /* padding-bottom: 20px; */
+    margin-bottom: 10px;
+    margin-left: 0;
+}
+
+.category-button {
+    background-color: #d2d2d2;
+    padding: 5px 15px;
+    border-radius: 15px;
 }
 
 .form__error {

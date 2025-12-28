@@ -43,14 +43,10 @@
             <li class="header-nav__item">
               <a class="header-nav__link" href="/mypage">マイページ</a>
             </li>
-            @else
-            <li class="header-nav__item login__link">
-              <a class="header-nav__link" href="/login">ログイン</a>
-            </li>
-            @endif
             <li  class="header-nav__item sell__link">
               <a class="header-nav__link" href="/sell">出品</a>
             </li>
+            @endif
           </ul>
         </nav>
       </div>

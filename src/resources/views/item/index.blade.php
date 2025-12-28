@@ -21,7 +21,7 @@
 
 <div class="product__inner">
   <div class="product__title">
-    <h2>@if (isset($keyword)){{request('keyword')}}の @endif商品一覧</h2>
+    <h1>@if (isset($keyword)){{request('keyword')}}の @endif商品一覧</h1>
     <a class="product__add-button" href="/register">+ 商品を追加</a>
   </div>
   <div class="product__content">
