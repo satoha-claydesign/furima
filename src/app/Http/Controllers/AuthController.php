@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     //
-    public function index()
+    public function registerIndex()
     {
-    return view('index');
+    return view('/mypage/profile');
     }
 }

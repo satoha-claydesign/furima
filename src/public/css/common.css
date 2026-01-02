@@ -14,9 +14,13 @@
     padding: 0 10px;
 }
 
+.search-form__item {
+    width: 40%;
+}
+
 form.keyword-search {
     display: flex;
-    width: 80%;
+    width: 100%;
 }
 
 .header-nav {
@@ -30,6 +34,13 @@ form.keyword-search {
     padding: 0 20px;
 }
 
+button.header-nav__link {
+    background-color: transparent;
+    border: none;
+}
+.sell__link {
+    margin: 0 20px;
+}
 .sell__link>.header-nav__link {
     background: #fff;
     padding: 10px 20px;
@@ -37,9 +48,7 @@ form.keyword-search {
     color: #000;
 }
 
-.search-form__item {
-    width: 50%;
-}
+
 
 .search-form__item-input.keyword-input {
     border-radius: 5px;

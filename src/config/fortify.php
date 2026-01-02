@@ -74,7 +74,8 @@ return [
     |
     */
 
-    'home' => RouteServiceProvider::HOME,
+    'home' => '/mypage/profile',
+    'redirects' => ['login' => '/mypage',],
 
     /*
     |--------------------------------------------------------------------------

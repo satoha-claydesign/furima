@@ -1,0 +1,41 @@
+h1 {
+    color: transparent;
+}
+
+.mypage__profile {
+    width: 1000px;
+    margin: 60px auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.mypage__profile-box {
+    display: flex;
+    justify-content: flex-start;
+    width: 360px;
+    align-items: center;
+}
+
+.mypage__image-box {
+    width: 200px;
+}
+
+.mypage__image {
+    width: 160px;
+    height: auto;
+}
+
+.mypage__profile-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.mypage__profile button {
+    text-decoration: none;
+    background: white;
+    color: red;
+    border: solid;
+    border-radius: 5px;
+    padding: 5px 40px;
+}
