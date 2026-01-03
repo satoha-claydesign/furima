@@ -1,9 +1,13 @@
+h1 {
+    text-align: center;
+    font-size: 32px;
+    margin-top: 60px;
+}
+
 .login-form__content {
     margin: 0 auto;
-    padding: 30px 15px;
-    max-width: 100vw;
+    width: 1000px;
     height: 90vh;
-    background-color: #f1ece6;
 }
 
 .login-form__heading {
@@ -13,11 +17,8 @@
 
 .form {
     margin: 0 auto;
-    width: 600px;
-    text-align: center;
-    padding: 60px;
-    background-color: #fff;
-    border-radius: 5px;
+    width: 60%;
+    padding: 20px 0;
 }
 
 .form__group {
@@ -27,7 +28,8 @@
 .form__group-title {
     text-align: left;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18px;
+    margin-bottom: 10px;
 }
 
 .form__error {
@@ -39,12 +41,12 @@
 .form__input--text input {
     padding: 10px;
     width: 100%;
-    height: 40px;
+    height: 60px;
     border-radius: 3px;
-    border: none;
+    border: solid #9b9b9b 1px;
     border-radius: 3px;
-    background-color: #f4f4f4;
     appearance: none;
+    font-size: 16px;
 }
 
 .form__button {
@@ -52,14 +54,18 @@
 }
 
 .form__button-submit {
-    padding: 10px;
-    width: 120px;
-    height: 40px;
+    display: block;
     border: none;
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+    height: 60px;
     border-radius: 3px;
-    background: #827469;
+    background: #ff5555;
     color: #fff;
     cursor: pointer;
+    text-align: center;
+    box-shadow: 2px 2px 4px #b5b4b4;
 }
 
 .register__link {

@@ -4,6 +4,8 @@
 
 .register-form__content {
     padding-bottom: 100px;
+    width: 1000px;
+    margin: 0 auto;
 }
 
 .register-form__heading h1 {
@@ -13,7 +15,7 @@
 
 .form {
     margin: 0 auto;
-    width: 50vw;
+    width: 60%;
     padding: 20px 0;
 }
 

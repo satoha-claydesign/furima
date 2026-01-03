@@ -23,7 +23,9 @@ h1 {
 
 .mypage__image {
     width: 160px;
-    height: auto;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .mypage__profile-name {
