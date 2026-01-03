@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/mypage', [UserController::class, 'index'])->name('mypage');
     Route::get('/profile', [UserController::class, 'profile']);
     Route::patch('/mypage/update', [UserController::class, 'update']);
+    Route::post('/item/{id}/likes', [LikeController::class, 'likeItem']);
+    Route::post('/item/{id}/dislikes', [LikeController::class, 'dislikeItem']);
 });
 
 

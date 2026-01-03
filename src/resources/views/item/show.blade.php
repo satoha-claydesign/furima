@@ -20,12 +20,24 @@
             <p class="show__info-price">¥ {{ $item->price }} <span>（税込）</span></p>
             <div class="show__info-icons">
                 <div class="show__likes">
-                    <form class="show__form-likes" action="/likes" method="post">
-                    @csrf
-                        <input type="hidden" name="id" value="{{ $item->id }}">
-                        <button class="show__form__likes" type="submit" value=""><img class="show__form__likes-mark" src="{{ asset('storage/images/likes_gray.png') }}" alt=""></button>
+                    <!--いいねボタンの作成 -->
+                    @auth
+                    <!--その投稿がいいねしているか判定 -->
+                    @if (Auth::user()->likes()->where('item_id', $item->id)->exists())
+                        <form class="show__form-likes" action="/item/{id}/dislikes" method="post">
+                        @csrf
+                            <input type="hidden" name="id" value="{{ $item->id }}">
+                            <button class="show__form__likes" type="submit" value=""><img class="show__form__likes-mark" src="{{ asset('storage/images/likes_red.png') }}" alt=""></button>
+                        </form>
+                    @else
+                        <form class="show__form-likes" action="/item/{id}/likes" method="post">
+                        @csrf
+                            <input type="hidden" name="id" value="{{ $item->id }}">
+                            <button class="show__form__likes" type="submit" value=""><img class="show__form__likes-mark" src="{{ asset('storage/images/likes_gray.png') }}" alt=""></button>
                     </form>
-                    <p>11</p>
+                    @endif
+                    <p>Likes {{ session('param') }}</p>
+                    @endauth
                 </div>
                 <div class="show__comment">
                     <img class="show__form__comment-mark" src="{{ asset('storage/images/comment_logo.png') }}" alt="">
