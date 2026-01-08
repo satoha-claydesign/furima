@@ -5,6 +5,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,7 @@ use App\Http\Controllers\LikeController;
 
 Route::get('/', [ItemController::class, 'index']);
 Route::get('/item/{id}', [ItemController::class, 'show'])->name('item.show');
+Route::post('/item/{id}/comment', [CommentController::class, 'comment']);
 
 
 Route::middleware('auth')->group(function () {
@@ -29,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/mypage/update', [UserController::class, 'update']);
     Route::post('/item/{id}/likes', [LikeController::class, 'likeItem']);
     Route::post('/item/{id}/dislikes', [LikeController::class, 'dislikeItem']);
+    
 });
 
 

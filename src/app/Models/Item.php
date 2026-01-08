@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use App\Models\Like;
+use App\Models\User;
+use App\Models\Comment;
+
 
 class Item extends Model
 {
@@ -30,4 +33,11 @@ class Item extends Model
         // User / Post has many Likes
         return $this->hasMany(Like::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'comments', 'item_id', 'user_id');
+    }
+
+    
 }

@@ -32,18 +32,20 @@ h1 {
 }
 
 .show__image {
-    width: 50%;
+    width: 45%;
 }
 
 .show__image>img {
     max-width: 90%;
 }
 
+.show__info {
+    width: 500px;
+}
 
 .show__info-title {
     font-size: 24px;
     margin-top: 20px;
-    
 }
 
 h2.show__info-title {
@@ -95,35 +97,18 @@ button.show__form__likes {
     font-size: 12px;
 }
 
-/* .show__info-input {
-    width: 500px;
-    height: 50px;
-    color: #b5b4b4;
-    font-size: 16px;
-}
-
-.show__input--checkbox{
-    font-size: 20px;
-    margin-right: 16px;
-}
-
-.show-checkbox {
-    transform: scale(1.2);
-    border-radius: 5px;
-    margin-right: 4px;
-
-}
-
-.show__input--checkbox label{
-    margin-right: 16px;
-} */
-
 
 .show-form__btn-inner {
-    display: flex;
-    justify-content: center;
     gap: 32px;
 }
+
+.show-form__btn-inner>textarea {
+    width: 96%;
+    height: 200px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
 .btn {
     display: block;
     border: none;
@@ -184,4 +169,34 @@ form.show__form-delete {
     width: 25px;
     height: 30px;
     cursor: pointer;
+}
+.comment-user {
+    margin-bottom: 40px;
+}
+
+.comment__user-info {
+    display: flex;
+    justify-content: flex-start;
+    width: 360px;
+    align-items: center;
+}
+
+.comment__user-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.comment__user-name {
+    font-size: 16px;
+    margin-left: 20px;
+}
+
+.comment__user-text {
+    background-color: #d2d2d2;
+    padding: 15px 10px;
+    width: 96%;
+    margin: 10px 0;
+    font-size: 14px;
 }

@@ -10,6 +10,8 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Like;
+use App\Models\Item;
+use App\Models\Comment;
 
 class User extends Authenticatable
 {
@@ -55,4 +57,15 @@ class User extends Authenticatable
         // User / Post has many Likes
         return $this->hasMany(Like::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+    
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'comments', 'user_id', 'item_id')->withPivot('user_id', 'item_id' );
+    }
+
 }

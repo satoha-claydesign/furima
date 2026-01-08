@@ -29,14 +29,11 @@ class LikeController extends Controller
         $like->save();
 
         // いいねの数を取得
-        $likes_count = $item->likes->count();
-
-        $param = [
-            'likes_count' => $likes_count, // いいねの数
-        ];
+        $item = Item::withCount('likes')->find($request->id);
+        $likesCount = $item->likes_count;
 
         // フロントにいいねの数を返す
-        return view('item.show', compact('item', 'categories', 'allcategories'))->with('param', $param);
+        return view('item.show', compact('item', 'categories', 'allcategories', 'likesCount'));
     }
 
     public function dislikeItem(Request $request, Item $item)
@@ -54,13 +51,12 @@ class LikeController extends Controller
         $liked_item->delete();
 
         // いいねの数を取得
-        $likes_count = $item->likes->count();
+        // いいねの数を取得
+        $item = Item::withCount('likes')->find($request->id);
+        $likesCount = $item->likes_count;
 
-        $param = [
-            'likes_count' => $likes_count, // いいねの数
-        ];
         // フロントにいいねの数を返す
-        return view('item.show', compact('item', 'categories', 'allcategories'))->with('param', $param);
+        return view('item.show', compact('item', 'categories', 'allcategories', 'likesCount'));
     }
 
 }

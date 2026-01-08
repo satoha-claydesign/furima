@@ -21,23 +21,40 @@
             <div class="show__info-icons">
                 <div class="show__likes">
                     <!--いいねボタンの作成 -->
-                    @auth
-                    <!--その投稿がいいねしているか判定 -->
-                    @if (Auth::user()->likes()->where('item_id', $item->id)->exists())
-                        <form class="show__form-likes" action="/item/{id}/dislikes" method="post">
-                        @csrf
-                            <input type="hidden" name="id" value="{{ $item->id }}">
-                            <button class="show__form__likes" type="submit" value=""><img class="show__form__likes-mark" src="{{ asset('storage/images/likes_red.png') }}" alt=""></button>
+                    @if(Auth::check())
+                        <!--その投稿がいいねしているか判定 -->
+                        @if (Auth::user()->likes()->where('item_id', $item->id)->exists())
+                            <form class="show__form-likes" action="/item/{id}/dislikes" method="post">
+                            @csrf
+                                <input type="hidden" name="id" value="{{ $item->id }}">
+                                <button class="show__form__likes" type="submit" value=""><img class="show__form__likes-mark" src="{{ asset('storage/images/likes_red.png') }}" alt=""></button>
+                            </form>
+                        @else
+                            <form class="show__form-likes" action="/item/{id}/likes" method="post">
+                            @csrf
+                                <input type="hidden" name="id" value="{{ $item->id }}">
+                                <button class="show__form__likes" type="submit" value=""><img class="show__form__likes-mark" src="{{ asset('storage/images/likes_gray.png') }}" alt=""></button>
                         </form>
+                        @endif
+                        <p>
+                            @if ($item->likes_count)
+                            {{ $item->likes_count }}
+                            @else
+                            0
+                            @endif
+                        </p>
                     @else
-                        <form class="show__form-likes" action="/item/{id}/likes" method="post">
-                        @csrf
-                            <input type="hidden" name="id" value="{{ $item->id }}">
-                            <button class="show__form__likes" type="submit" value=""><img class="show__form__likes-mark" src="{{ asset('storage/images/likes_gray.png') }}" alt=""></button>
-                    </form>
+                        <p class="¥show__form-likes">
+                            <button class="show__form__likes" type="" value=""><img class="show__form__likes-mark" src="{{ asset('storage/images/likes_gray.png') }}" alt=""></button>
+                        </p>
+                        <p>
+                            @if ($item->likes_count)
+                            {{ $item->likes_count }}
+                            @else
+                            0
+                            @endif
+                        </p>
                     @endif
-                    <p>Likes {{ session('param') }}</p>
-                    @endauth
                 </div>
                 <div class="show__comment">
                     <img class="show__form__comment-mark" src="{{ asset('storage/images/comment_logo.png') }}" alt="">
@@ -65,27 +82,46 @@
                     <dt>商品の状態</dt>
                     <dd>
                         @if ($item['condition'] == 1)
-                        1. 商品のお届けについて
+                        良好
                         @elseif ($item['condition'] == 2)
-                        2. 商品の交換について
+                        目立った傷や汚れなし
                         @elseif ($item['condition'] == 3)
-                        3. 商品トラブル
+                        やや傷や汚れあり
                         @elseif ($item['condition'] == 4)
-                        4. ショップへのお問い合わせ
-                        @elseif ($item['condition'] == 5)
-                        5. その他
+                        状態が悪い
                         @endif
                     </dd>
                 </dl>
             </div>
             <!-- コメント -->
             <h3 class="show__info-title">コメント</h3>
-            <div class="show__user-comment">
+            <div class="show__users-comment">
+                    @foreach ($userComments as $userComment)
+                    <div class="comment-user">
+                        <div class="comment__user-info">
+                            @if (!empty($userComment['commentUserImage']))
+                            <img class="comment__user-image" src="{{ asset('storage/images/profiles/' . $userComment['commentUserImage']) }}" alt="" />
+                            @endif
+                            <p class="comment__user-name">{{ $userComment['commentUserName'] }}</p>
+                        </div>
+                        <div class="comment__user-text">
+                            {{ $userComment['commentBody'] }}
+                        </div>
+                    </div>
+                    @endforeach
             </div>
-            <p class="show__info-comment"></p>
+            <div class="show__comment-input">
+                <h4>商品へのコメント</h4>
+                <form action="/item/{id}/comment" class="show-form__btn-inner" method="post">
+                @csrf
+                    <textarea type="text" name="body"></textarea>
+                    <input type="hidden" name="id" value="{{ $item->id }}">
+                    <button class="show-form__send-btn btn" type="submit">コメントを送信する</button>
+                </form>
+            </div>
         </div>
     </div>
-    <div class="show__description">
+</div>
     
-    
+
 @endsection
