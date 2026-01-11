@@ -20,8 +20,11 @@ use App\Http\Controllers\CommentController;
 
 
 Route::get('/', [ItemController::class, 'index']);
+Route::get('/search', [ItemController::class, 'search']);
 Route::get('/item/{id}', [ItemController::class, 'show'])->name('item.show');
 Route::post('/item/{id}/comment', [CommentController::class, 'comment']);
+Route::get('/recommend', [ItemController::class, 'index']);
+
 
 
 Route::middleware('auth')->group(function () {
@@ -31,7 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/mypage/update', [UserController::class, 'update']);
     Route::post('/item/{id}/likes', [LikeController::class, 'likeItem']);
     Route::post('/item/{id}/dislikes', [LikeController::class, 'dislikeItem']);
-    
+    Route::get('/mylist', [LikeController::class, 'myList']);
 });
 
 

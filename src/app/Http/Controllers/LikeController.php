@@ -12,6 +12,28 @@ use Illuminate\Support\Facades\Auth;
 class LikeController extends Controller
 {
     //
+
+    public function myList(Item $item)
+    {
+        if (Auth::check()) {
+            // ログインユーザーのidを取得
+            $user = auth()->user()->load('likes');
+            $user_id = $user->id;
+            $items = Item::with('likes')->whereHas('likes', function($query) use ($user_id) {
+            $query->where('user_id', $user_id);
+            })->get();
+
+            $categories = $item->categories();
+            $allcategories = Category::all();
+
+            // フロントにいいねの数を返す
+            return view('index', compact('items','categories') );
+        }
+        else {
+            return redirect('/');
+        }
+    }
+
     public function likeItem(Request $request, Item $item)
     {
 
@@ -20,7 +42,6 @@ class LikeController extends Controller
         $item = Item::find($request->id);
         $categories = $item->categories();
         $allcategories = Category::all();
-
 
         //「いいね」していない場合は，likesテーブルにレコードを追加
         $like = new Like();

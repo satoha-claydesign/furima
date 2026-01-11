@@ -41,3 +41,101 @@ h1 {
     border-radius: 5px;
     padding: 5px 40px;
 }
+
+
+.item__content {
+    display: flex;
+}
+
+/* 一覧 */
+.item__inner {
+    margin: 0 auto;
+    padding: 30px 15px;
+    max-width: 1230px;
+}
+
+.item__tab {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    border-bottom: #ddd solid 1px;
+}
+
+/* .item__tab>p {
+    width: 20%;
+    margin-bottom: 0;
+    padding-top: 20px;
+} */
+
+button.tab-label {
+    border: none;
+    background: none;
+    font-size: 16px;
+    padding: 5px 20px;
+    cursor: pointer;
+}
+
+.item__tab-recommend {
+    color: #ff0000;
+    cursor: pointer;
+}
+
+.item__tab-mypage a {
+    text-decoration: none;
+    cursor: pointer;
+    color: #000;
+}
+
+/* ラジオボタン自体は非表示にする */
+.tab-input {
+    display: none;
+}
+
+/* 全てのタブコンテンツをデフォルトで非表示にする */
+.tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+/* カード表示 */
+
+.flex__item {
+    display: flex;
+    max-width: 1200px;
+    width: 1200px;
+    flex-wrap: wrap;
+    gap: 2%;
+}
+
+.item__card-box {
+    width: 23%;
+    margin: 10px 0 40px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+}
+
+.card__img img {
+    width: 100%;
+}
+
+.card__content {
+    padding: 15px;
+}
+
+.tag {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+.card__tag {
+    color: #000;
+    margin: 0;
+}
+
+.card__price {
+    color: #888888;
+}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Profile;
+use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +17,8 @@ class UserController extends Controller
     {
         if (Auth::check()) {
             $user = auth()->user()->load('profile');
-            return view('mypage.index', compact('user')); // mypage.indexビューにデータを渡す
+            $items = Item::all();
+            return view('mypage.index', compact('user', 'items')); // mypage.indexビューにデータを渡す
         } else {
             return redirect('/login');
         }

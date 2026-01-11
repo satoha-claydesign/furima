@@ -28,7 +28,7 @@
         <form class="keyword-search" action="/search" method="get">
           @csrf
           <input type="text" class="search-form__item-input keyword-input" name="keyword"
-                  placeholder="何をお探しですか" value="{{request('keyword')}}" />
+                  placeholder="何をお探しですか" value="{{old('keyword')}}" />
           <div class="search-form__actions">
             <input class="item__search-button" type="submit" value="検索">
           </div>

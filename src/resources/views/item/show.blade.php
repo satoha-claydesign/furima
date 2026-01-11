@@ -94,7 +94,14 @@
                 </dl>
             </div>
             <!-- コメント -->
-            <h3 class="show__info-title">コメント</h3>
+            <h3 class="show__info-title">コメント　(
+                            @if ($commentsCount)
+                            {{ $commentsCount }}
+                            @else
+                            0
+                            @endif
+                            )
+                        </></h3>
             <div class="show__users-comment">
                     @foreach ($userComments as $userComment)
                     <div class="comment-user">

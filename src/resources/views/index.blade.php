@@ -18,14 +18,25 @@
   </div>
   @endif
 </div>
-<div class="item__tab">
+<!-- <div class="item__tab">
     <p class="item__tab-recommend">おすすめ</p>
     <p class="item__tab-mypage"><a href="/mylist">マイリスト</a></p>
-</div>
+</div> -->
 <div class="item__inner">
-    <div class="item__content">
+    <div class="item__tab">
+        <form action="/recommend" method="get">
+            <input type="hidden" name="tab-group" id="tab1" checked class="tab-input">
+            <button for="tab1" class="tab-label item__tab-recommend">おすすめ</button>
+        </form>
+        <form action="/mylist" method="get">
+            <input type="hidden" name="tab-group" id="tab2" class="tab-input">
+            <button type="submit" for="tab2" class="tab-label item__tab-mypage">マイリスト</button>
+        </form>
+    </div>
+
+    <div class="item__content" id="content1">
         <div class="flex__item wrap">
-        @foreach($items as $item)
+            @foreach($items as $item)
             <a class="item__card-box" href="/item/{{ $item->id }}">
                 <div class="item__card">
                     <div class="card__img">
@@ -38,10 +49,8 @@
                     </div>
                 </div>
             </a>
-        @endforeach
+            @endforeach
+        </div>
     </div>
-    <div class="page__parts">
-    </div>
-  </div>
 </div>
 @endsection

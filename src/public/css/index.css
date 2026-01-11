@@ -28,13 +28,20 @@
     display: flex;
     justify-content: left;
     align-items: center;
-    padding: 10px 140px;
     border-bottom: #ddd solid 1px;
 }
-.item__tab>p {
+/* .item__tab>p {
     width: 20%;
     margin-bottom: 0;
     padding-top: 20px;
+} */
+
+button.tab-label {
+    border: none;
+    background: none;
+    font-size: 16px;
+    padding: 5px 20px;
+    cursor: pointer;
 }
 
 .item__tab-recommend {
@@ -48,32 +55,37 @@
     color: #000;
 }
 
-/* .product__title>h2{
-    font-size: 30px;
-    font-weight: bold;
-} */
-
-/* .product__add-button, .product__search-button {
-    padding: 10px;
-    width: 200px;
-    height: 48px;
-    border: none;
-    border-radius: 3px;
-    background: #f7d656;
-    color: #000;
-    cursor: pointer;
-    font-size: 16px;
-    box-shadow: #ddd 2px 2px 4px;
-} */
-
-/* .product__search-button{
-    width: 90%;
+/* ラジオボタン自体は非表示にする */
+.tab-input {
+    display: none;
 }
-a.product__add-button {
-    text-align: center;
-    text-decoration: none;
-    margin-right: 34px;
-} */
+
+/* 全てのタブコンテンツをデフォルトで非表示にする */
+.tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+/* 選択されているタブに対応するコンテンツを表示する */
+/* `+` (隣接セレクタ) や `~` (間接セレクタ) を使って、チェックされたinputに続く要素を指定 */
+#tab1:checked~#content1,
+#tab2:checked~#content2 {
+    display: block;
+}
+
+.tab-label:hover {
+    background: #f3f3f3;
+}
+
+/* 選択されているタブのラベルのスタイル */
+#tab1:checked~.tab-label[for="tab1"],
+#tab2:checked~.tab-label[for="tab2"] {
+    background: #fff;
+    border-bottom: 1px solid #fff;
+}
+
 
 .item__content {
     display: flex;
@@ -83,6 +95,7 @@ a.product__add-button {
 .flex__item {
     display: flex;
     max-width: 1200px;
+    width: 1200px;
     flex-wrap: wrap;
     gap: 2%;
 }
