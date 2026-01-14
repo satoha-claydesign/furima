@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/item/{id}/likes', [LikeController::class, 'likeItem']);
     Route::post('/item/{id}/dislikes', [LikeController::class, 'dislikeItem']);
     Route::get('/mylist', [LikeController::class, 'myList']);
+    Route::get('/purchase/{id}', [OrderController::class, 'purchase'])->name('purchase.index');
+    Route::post('/payment/{id}', [OrderController::class, 'payment'])->name('purchase.index');
 });
 
 

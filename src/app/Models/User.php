@@ -12,6 +12,7 @@ use App\Models\Profile;
 use App\Models\Like;
 use App\Models\Item;
 use App\Models\Comment;
+use App\Models\Order;
 
 class User extends Authenticatable
 {
@@ -66,6 +67,11 @@ class User extends Authenticatable
     public function items()
     {
         return $this->belongsToMany(Item::class, 'comments', 'user_id', 'item_id')->withPivot('user_id', 'item_id' );
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 
 }

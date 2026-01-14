@@ -61,9 +61,10 @@
                     <p>1</p>
                 </div>
             </div>
-            <form action="">
+            <form action="/purchase/{id}" method="get">
                 <div class="show-form__btn-inner">
-                    <button class="show-form__send-btn btn" type="submit" name="id" value="{{ $item->id }}">購入手続き</button>
+                    <input type="hidden" name="id" value="{{ $item->id }}">
+                    <button class="show-form__send-btn btn" type="submit" value="{{ $item->id }}">購入手続き</button>
                 </div>
             </form>
             <!-- 商品説明 -->

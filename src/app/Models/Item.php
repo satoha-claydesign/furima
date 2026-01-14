@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Like;
 use App\Models\User;
 use App\Models\Comment;
+use App\Models\Order;
 
 
 class Item extends Model
@@ -39,5 +40,8 @@ class Item extends Model
         return $this->belongsToMany(User::class, 'comments', 'item_id', 'user_id')->withPivot('body');
     }
 
-    
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }
