@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Item;
 use App\Models\Comment;
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,9 +16,10 @@ class ItemController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $items = Item::all();
+        $items = Item::with('orders')->get();
+        $order = Order::all;
         $conditions = config('condition');
-        return view('index', ['items' => $items],['categories' => $categories]);
+        return view('index', compact('items', 'categories'));
     }
 
     public function indexLogin()

@@ -10,7 +10,7 @@ h1 {
 }
 
 .order-group {
-    width: 70%;
+    width: 60%;
 }
 .item-group, .payment-group, .address-group {
     border-bottom: gray 1px solid;
@@ -25,6 +25,10 @@ h1 {
 h2 {
     font-size: 20px;
     margin-top: 40px;
+}
+
+.payment-form {
+    margin-left: 40px;
 }
 
 .item__image {
@@ -55,7 +59,7 @@ h2.item__info-title {
 }
 
 .purchase-group {
-    width: 30%;;
+    width: 32%;
 }
 
 .address-group-title {
@@ -67,13 +71,38 @@ h2.item__info-title {
     text-decoration: none;
     height: 30px;
     text-align: center;
-    border: #4dcbf5 solid 1px;
     border-radius: 3px;
+    border: none;
+    background: none;
     color: #4dcbf5;
     margin-top: 20px;
     padding: 0px 20px;
     cursor: pointer;
 }
+
+.profile__address {
+    margin-left: 40px;
+}
+
+.purchase-box {
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+.purchase-box tr {
+    height: 80px;
+    border: #000 solid 1px;
+}
+
+.purchase-box th {
+    width: 40%;
+    font-weight: normal;
+}
+
+.purchase-box td {
+    font-weight: normal;
+}
+
 
 .show-form__btn-inner {
     gap: 32px;
@@ -91,7 +120,7 @@ h2.item__info-title {
     border: none;
     font-size: 16px;
     padding: 10px;
-    width:80%;
+    width:100%;
     height: 42px;
     border-radius: 3px;
     background: #ff5555;

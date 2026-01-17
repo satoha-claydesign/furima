@@ -40,8 +40,8 @@ class Item extends Model
         return $this->belongsToMany(User::class, 'comments', 'item_id', 'user_id')->withPivot('body');
     }
 
-    public function order()
+    public function orders()
     {
-        return $this->belongsTo(Order::class);
+        return $this->hasMany(Order::class);
     }
 }

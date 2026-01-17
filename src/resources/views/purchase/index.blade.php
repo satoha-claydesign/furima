@@ -21,9 +21,10 @@
         </div>
         <div class="payment-group">
             <h2>お支払い方法</h2>
-            <form action="/payment/{id}" method="post">
+            <form action="/payment/{id}" method="post" class="payment-form">
                 @csrf
                 <input type="hidden" name="item_id" value="{{ $item->id }}">
+                <input type="hidden" name="order_id" value="{{ $order->id }}">
                 <select class="form__category__item-select" name="payment" id="payment" onchange="this.form.submit()">
                     <option type="hidden">選択してください</option>
                     <option @if (!empty($payment)) @if($payment === "1") selected @endif @endif value="1">
@@ -38,13 +39,22 @@
         <div class="address-group">
             <div class="address-group-title">
                 <h2>配送先</h2>
-                <a class="address-change" href="/purchase/{id}/address">変更する</a>
+                <form action="/purchase/{id}/address" method="get">
+                    <input type="hidden" name="order_id" value="{{ $order->id }}">
+                    <input type="hidden" name="item_id" value="{{ $item->id }}">
+                    <button class="address-change" href="/purchase/{id}/address" type="submit">変更する</button>
+                </form>
             </div>
-            
             <div class="profile__address">
-                <p class="profile__info-title">〒 {{ $user->profile->postalCode }}</p>
-                <p class="profile__info-title">{{ $user->profile->address }}</p>
-                <p class="profile__info-title">{{ $user->profile->building }}</p>
+                <p class="profile__info-title">〒 @if (!empty($order->order_postalCode)) {{ $order->order_postalCode }}
+                                                @else {{ $user->profile->postalCode }}
+                                                @endif</p>
+                <p class="profile__info-title">@if (!empty($order->order_address)) {{ $order->order_address }}
+                                                @else {{ $user->profile->address }}
+                                                @endif</p>
+                <p class="profile__info-title">@if (!empty($order->order_building)) {{ $order->order_building }}
+                                                @else {{ $user->profile->building }}
+                                                @endif</p>
             </div>
         </div>
     </div>
@@ -56,10 +66,10 @@
             </tr>
             <tr>
                 <th>支払い方法</th>
-                <td>@if (!empty($payment))
-                        @if($payment === "1")
+                <td>@if (!empty($order))
+                        @if($order->payment === "1")
                             コンビニ払い
-                        @elseif($payment === "2")
+                        @elseif($order->payment === "2")
                             クレジットカード払い
                         @else
                             未選択
@@ -68,9 +78,12 @@
                 </td>
             </tr>
         </table>
-        <form action="/purchase/{id}" method="get">
+        <form action="/complete/{id}" method="post">
+            @csrf
+            @method('PATCH')
                 <div class="purchase-form__btn-inner">
-                    <input type="hidden" name="id" value="{{ $item->id }}">
+                    <input type="hidden" name="item_id" value="{{ $item->id }}">
+                    <input type="hidden" name="order_id" value="{{ $order->id }}">
                     <button class="show-form__send-btn btn" type="submit">購入する</button>
                 </div>
             </form>

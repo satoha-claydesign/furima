@@ -41,6 +41,14 @@
                 <div class="item__card">
                     <div class="card__img">
                         <img src="{{ asset('storage/images/' . $item->image) }}" alt="" />
+                        <!-- soldラベル -->
+                        @if (!empty($item->orders))
+                            @foreach ($item->orders as $order)
+                                @if ($order->status === "complete")
+                                <div class="sold-label">SOLD</div>
+                                @endif
+                            @endforeach
+                        @endif
                     </div>
                     <div class="card__content">
                         <div class="tag">

@@ -1,0 +1,116 @@
+h1 {
+    text-align: center;
+    font-size: 32px;
+    margin-top: 60px;
+}
+
+.profile__inner {
+    width: 1000px;
+    margin: 60px auto;
+}
+
+.profile__image {
+    width: 70%;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    gap: 8%;
+}
+
+.profile__image>img {
+    width: 240px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.profile__image-info {
+    margin-top: 10px;
+}
+
+.profile__image-info>label {
+    text-decoration: none;
+    background: white;
+    color: red;
+    border: solid;
+    border-radius: 5px;
+    padding: 5px 40px;
+}
+
+
+.profile__image-info label:hover {
+    opacity: 0.8;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.profile__info {
+    width: 500px;
+    margin: 60px auto;
+}
+
+.profile__info-title {
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.profile__info-title:first-child {
+    margin-top: 0;
+}
+
+.profile__info-input {
+    width: 100%;
+    height: 50px;
+    color: #000;
+    font-size: 16px;
+}
+
+.profile-form__btn-inner {
+    display: flex;
+    justify-content: center;
+    margin: 32px auto;
+    gap: 32px;
+    width: 60%;
+}
+
+.btn {
+    display: block;
+    border: none;
+    font-size: 16px;
+    padding: 10px;
+    width: 500px;
+    height: 60px;
+    border-radius: 3px;
+    background: #ff5555;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 2px 2px 4px #b5b4b4;
+}
+
+.profile-form__back-btn {
+    text-decoration: none;
+    background-color: #b5b4b4;
+}
+
+.form__error {
+    color: red;
+}
+
+form.profile__form-delete {
+    text-align: right;
+    margin-top: -36px;
+}
+
+.profile__form__delete-mark {
+    background: transparent;
+    border: none;
+}
+
+.profile__form__delete-mark>img {
+    width: 25px;
+    height: 30px;
+    cursor: pointer;
+}

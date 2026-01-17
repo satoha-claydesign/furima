@@ -37,7 +37,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/item/{id}/dislikes', [LikeController::class, 'dislikeItem']);
     Route::get('/mylist', [LikeController::class, 'myList']);
     Route::get('/purchase/{id}', [OrderController::class, 'purchase'])->name('purchase.index');
-    Route::post('/payment/{id}', [OrderController::class, 'payment'])->name('purchase.index');
+    Route::post('/payment/{id}', [OrderController::class, 'payment']);
+    Route::get('/purchase/{id}/address', [OrderController::class, 'address']);
+    Route::patch('/purchase/{id}/changeAddress', [OrderController::class, 'updateAddress'])->name('purchase.index');
+    Route::patch('/complete/{id}', [OrderController::class, 'complete']);
 });
 
 
