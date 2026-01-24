@@ -48,7 +48,10 @@
               <a class="header-nav__link" href="/mypage">マイページ</a>
             </li>
             <li  class="header-nav__item sell__link">
-              <a class="header-nav__link" href="/sell">出品</a>
+              <form action="/sell" method="get">
+                @csrf
+                <button class="header-nav__link" type="submit" value="出品">出品</button>
+              </form>
             </li>
             @endif
           </ul>

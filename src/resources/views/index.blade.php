@@ -18,10 +18,6 @@
   </div>
   @endif
 </div>
-<!-- <div class="item__tab">
-    <p class="item__tab-recommend">おすすめ</p>
-    <p class="item__tab-mypage"><a href="/mylist">マイリスト</a></p>
-</div> -->
 <div class="item__inner">
     <div class="item__tab">
         <form action="/recommend" method="get">

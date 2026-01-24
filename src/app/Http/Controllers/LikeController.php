@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\Like;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -53,8 +54,26 @@ class LikeController extends Controller
         $item = Item::withCount('likes')->find($request->id);
         $likesCount = $item->likes_count;
 
+        if ($item->comments) {
+            // 関連するコメントのコレクションを取得
+            $comments = $item->comments;
+        }
+        // 1. Controller側: Eager Loadingでデータを取得
+        $comments = Comment::with('user.profile')->where('item_id',$item->id)->get();
+        $commentsCount = $comments->count();
+
+        // 2. データの整形
+        $userComments = $comments->map(function ($comment) {
+            return [
+                'id' => $comment->id,
+                'commentUserName' => $comment->user->name ?? 'コメントしたユーザー',
+                'commentUserImage' => $comment->user->profile->image ?? 'default.jpg',
+                'commentBody' => $comment->body,
+            ];
+        })->toArray();
+
         // フロントにいいねの数を返す
-        return view('item.show', compact('item', 'categories', 'allcategories', 'likesCount'));
+        return view('item.show', compact('item', 'categories', 'allcategories', 'likesCount', 'commentsCount', 'comments','userComments'));
     }
 
     public function dislikeItem(Request $request, Item $item)
@@ -76,8 +95,26 @@ class LikeController extends Controller
         $item = Item::withCount('likes')->find($request->id);
         $likesCount = $item->likes_count;
 
+        if ($item->comments) {
+            // 関連するコメントのコレクションを取得
+            $comments = $item->comments;
+        }
+        // 1. Controller側: Eager Loadingでデータを取得
+        $comments = Comment::with('user.profile')->where('item_id',$item->id)->get();
+        $commentsCount = $comments->count();
+
+        // 2. データの整形
+        $userComments = $comments->map(function ($comment) {
+            return [
+                'id' => $comment->id,
+                'commentUserName' => $comment->user->name ?? 'コメントしたユーザー',
+                'commentUserImage' => $comment->user->profile->image ?? 'default.jpg',
+                'commentBody' => $comment->body,
+            ];
+        })->toArray();
+
         // フロントにいいねの数を返す
-        return view('item.show', compact('item', 'categories', 'allcategories', 'likesCount'));
+        return view('item.show', compact('item', 'categories', 'allcategories', 'likesCount', 'commentsCount', 'comments','userComments'));
     }
 
 }

@@ -1,25 +1,33 @@
 h1 {
-    display: none;
+    text-align: center;
+    margin: 50px auto;
 }
 
-.show__inner {
+.sell__inner {
     width: 700px;
     margin: 60px auto;
 }
 
-.show-group {
-    color: #9b9b9b;
+p.sell__image-info {
+    width: 100%;
+    height: 100px;
+    border: gray solid 1px;
+    border-radius: 3px;
+    text-align: center;
 }
 
-.show__image-info label {
-    padding: 5px 10px;
-    background-color: #d6d7d7;
+.sell__image-info label {
+    display: inline-block;
+    margin: 30px auto;
+    padding: 5px 15px;
     cursor: pointer;
-    border: #777 solid 0.5px;
+    border: red solid 2px;
+    border-radius: 5px;
     font-size: 14px;
+    color: red;
 }
 
-.show__image-info label:hover {
+.sell__image-info label:hover {
     opacity: 0.8;
 }
 
@@ -27,39 +35,75 @@ input[type="file"] {
     display: none;
 }
 
-.show__info-title {
+.sell__info-title {
     font-size: 18px;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
-.show__info-title:first-child {
-    margin-top: 0;
+h2.sell__info-title {
+    font-size: 24px;
+    border-bottom: 1px #a9a5a5 solid;
+    margin: 40px 0;
 }
 
-.show__info-input {
+select#condition {
+    width: 100%;
+    height: 30px;
+}
+
+.sell__info-input {
     width: 100%;
     height: 50px;
-    color: #b5b4b4;
+    /* color: #b5b4b4; */
     font-size: 16px;
 }
 
-.show__input--checkbox {
+.sell__input--checkbox {
     font-size: 20px;
     margin-right: 16px;
 }
 
-.show-checkbox {
+.sell-checkbox {
     transform: scale(1.2);
     border-radius: 5px;
     margin-right: 4px;
-
 }
 
-.show__input--checkbox label {
+.sell__input--checkbox label {
     margin-right: 16px;
 }
 
-.show__description {
+/* 元のチェックボックスを非表示 */
+.hidden-checkbox {
+    position: absolute;
+    /* 画面外に配置 */
+    width: 0;
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* ラベル（ボタン本体）のスタイル */
+.sell__input--checkbox label {
+    display: inline-block;
+    border: 1px solid #ff0000;
+    color: #ff0000;
+    cursor: pointer;
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    /* transition: background-color 0.3s, border-color 0.3s; */
+}
+
+/* チェックされた時のラベルのスタイル */
+.sell__input--checkbox input[type="checkbox"]:checked+label {
+    background-color: #ff0000;
+    border-color: #ff0000;
+    color: white;
+}
+
+.sell__description {
     margin-top: 40px;
 }
 
@@ -68,7 +112,7 @@ input[type="file"] {
     height: 180px;
 }
 
-.show-form__btn-inner {
+.sell-form__btn-inner {
     display: flex;
     justify-content: center;
     margin-top: 32px;
@@ -91,7 +135,7 @@ input[type="file"] {
     box-shadow: 2px 2px 4px #b5b4b4;
 }
 
-.show-form__back-btn {
+.sell-form__back-btn {
     text-decoration: none;
     background-color: #b5b4b4;
 }

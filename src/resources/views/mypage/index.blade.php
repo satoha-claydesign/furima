@@ -24,13 +24,13 @@
     <div class="mypage__list">
         <div class="item__inner">
             <div class="item__tab">
-                <form action="/recommend" method="get">
-                    <input type="hidden" name="tab-group" id="tab1" checked class="tab-input">
-                    <button for="tab1" class="tab-label item__tab-recommend">おすすめ</button>
+                <form action="/mysell" method="get">
+                    <input type="hidden" name="tab-group" id="tab1" class="tab-input">
+                    <button type="submit" for="tab2" class="tab-label item__tab-mypage">出品した商品</button>
                 </form>
-                <form action="/mylist" method="get">
-                    <input type="hidden" name="tab-group" id="tab2" class="tab-input">
-                    <button type="submit" for="tab2" class="tab-label item__tab-mypage">マイリスト</button>
+                <form action="/myorder" method="get">
+                    <input type="hidden" name="tab-group" id="tab1" checked class="tab-input">
+                    <button for="tab1" class="tab-label item__tab-recommend">購入した商品</button>
                 </form>
             </div>
 
@@ -52,6 +52,7 @@
                     @endforeach
                 </div>
             </div>
+
         </div>
     </div>
 @endsection

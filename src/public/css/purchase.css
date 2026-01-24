@@ -130,6 +130,12 @@ h2.item__info-title {
     box-shadow: 2px 2px 4px #b5b4b4;
 }
 
+.show-form__sold-btn {
+    background: #b1b1b1;
+    color: #000000;
+    cursor: none;
+}
+
 
 .form__error {
     color: red;

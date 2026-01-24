@@ -9,6 +9,7 @@ use App\Models\Like;
 use App\Models\User;
 use App\Models\Comment;
 use App\Models\Order;
+use App\Models\Sell;
 
 
 class Item extends Model
@@ -43,5 +44,11 @@ class Item extends Model
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function sell()
+    {
+        // User / Post has many Likes
+        return $this->hasOne(Sell::class);
     }
 }

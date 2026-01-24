@@ -78,15 +78,24 @@
                 </td>
             </tr>
         </table>
-        <form action="/complete/{id}" method="post">
-            @csrf
-            @method('PATCH')
+        <!-- soldラベル -->
+        @if (!empty($item->orders))
+            @if ($item->orders->contains('status', 'complete'))
                 <div class="purchase-form__btn-inner">
-                    <input type="hidden" name="item_id" value="{{ $item->id }}">
-                    <input type="hidden" name="order_id" value="{{ $order->id }}">
-                    <button class="show-form__send-btn btn" type="submit">購入する</button>
+                    <p class="show-form__sold-btn btn">購入済</p>
                 </div>
-            </form>
+            @else
+                <form action="/complete/{id}" method="post">
+                    @csrf
+                    @method('PATCH')
+                        <div class="purchase-form__btn-inner">
+                            <input type="hidden" name="item_id" value="{{ $item->id }}">
+                            <input type="hidden" name="order_id" value="{{ $order->id }}">
+                            <button class="show-form__send-btn btn" type="submit">購入する</button>
+                        </div>
+                </form>
+            @endif
+        @endif
     </div>
 </div>
 @endsection

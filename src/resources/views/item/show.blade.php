@@ -61,12 +61,22 @@
                     <p>1</p>
                 </div>
             </div>
-            <form action="/purchase/{id}" method="get">
-                <div class="show-form__btn-inner">
-                    <input type="hidden" name="id" value="{{ $item->id }}">
-                    <button class="show-form__send-btn btn" type="submit" value="{{ $item->id }}">購入手続き</button>
-                </div>
-            </form>
+            <!-- soldラベル -->
+            @if (!empty($item->orders))
+                @if ($item->orders->contains('status', 'complete'))
+                    <div class="purchase-form__btn-inner">
+                        <p class="show-form__sold-btn btn">購入済</p>
+                    </div>
+                @else
+                    <form action="/purchase/{id}" method="get">
+                        <div class="show-form__btn-inner">
+                            <input type="hidden" name="id" value="{{ $item->id }}">
+                            <button class="show-form__send-btn btn" type="submit" value="{{ $item->id }}">購入手続き</button>
+                        </div>
+                    </form>
+                @endif
+            @endif
+            
             <!-- 商品説明 -->
             <h3 class="show__info-title">商品説明</h3>
             <p class="show__info-description">{{ $item->description }}</p>

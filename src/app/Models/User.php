@@ -13,6 +13,7 @@ use App\Models\Like;
 use App\Models\Item;
 use App\Models\Comment;
 use App\Models\Order;
+use App\Models\Sell;
 
 class User extends Authenticatable
 {
@@ -72,6 +73,11 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function sells()
+    {
+        return $this->hasMany(Sell::class);
     }
 
 }

@@ -30,6 +30,24 @@ class CommentController extends Controller
         $comment->item_id = $item_id; // アイテムを関連付け
         $comment->save();
 
-        return view('item.show', compact('comment','item', 'categories', 'allcategories', 'likesCount'));
+        if ($item->comments) {
+            // 関連するコメントのコレクションを取得
+            $comments = $item->comments;
+        }
+        // 1. Controller側: Eager Loadingでデータを取得
+        $comments = Comment::with('user.profile')->where('item_id',$item->id)->get();
+        $commentsCount = $comments->count();
+
+        // 2. データの整形
+        $userComments = $comments->map(function ($comment) {
+            return [
+                'id' => $comment->id,
+                'commentUserName' => $comment->user->name ?? 'コメントしたユーザー',
+                'commentUserImage' => $comment->user->profile->image ?? 'default.jpg',
+                'commentBody' => $comment->body,
+            ];
+        })->toArray();
+
+        return view('item.show', compact('comment','item', 'categories', 'allcategories', 'likesCount', 'commentsCount', 'comments','userComments'));
     }
 }

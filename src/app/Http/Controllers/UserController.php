@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Item;
+use App\Models\Sell;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -18,8 +19,45 @@ class UserController extends Controller
         if (Auth::check()) {
             $user = auth()->user()->load('profile');
             $items = Item::all();
+
             return view('mypage.index', compact('user', 'items')); // mypage.indexビューにデータを渡す
         } else {
+            return redirect('/login');
+        }
+    }
+
+    public function mySell(Item $item, Sell $sell)
+    {
+        if (Auth::check()) {
+            // ログインユーザーのidを取得
+            $user = auth()->user()->load('sells');
+            $user_id = $user->id;
+            $items = Item::with('sell')->whereHas('sell', function($query) use ($user_id) {
+            $query->where('user_id', $user_id);
+            })->get();
+
+            // フロントにいいねの数を返す
+            return view('mypage.index', compact('user', 'items') );
+        }
+        else {
+            return redirect('/login');
+        }
+    }
+
+    public function myOrder(Item $item, Sell $sell)
+    {
+        if (Auth::check()) {
+            // ログインユーザーのidを取得
+            $user = auth()->user()->load('orders');
+            $user_id = $user->id;
+            $items = Item::with('orders')->whereHas('orders', function($query) use ($user_id) {
+            $query->where('user_id', $user_id)->where('status', 'complete');
+            })->get();
+
+            // フロントにいいねの数を返す
+            return view('mypage.index', compact('user', 'items') );
+        }
+        else {
             return redirect('/login');
         }
     }
@@ -56,7 +94,7 @@ class UserController extends Controller
                     'address' => $request->address,
                     'building' => $request->building,
                 ]
-        );
+            );
         }
 
         return redirect('/mypage');

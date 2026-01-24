@@ -124,6 +124,12 @@ button.show__form__likes {
     box-shadow: 2px 2px 4px #b5b4b4;
 }
 
+.show-form__sold-btn {
+    background: #b1b1b1;
+    color: #000000;
+    cursor: none;
+}
+
 .show__info-description, .show__info-category {
     margin-bottom: 50px;
 }

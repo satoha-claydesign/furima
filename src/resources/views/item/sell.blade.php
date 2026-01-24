@@ -1,35 +1,20 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/register.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/sell.css') }}" />
 @endsection
 
 @section('content')
-<h1>商品登録</h1>
-<div class="show__inner">
-    <h2>商品登録</h2>
+<h1>商品の出品</h1>
+<div class="sell__inner">
 
-<form action="/store" method="post" enctype="multipart/form-data">
+<form action="/item/store" method="post" enctype="multipart/form-data">
     @csrf
-    <div class="show-group">
-        <div class="show__info">
-            <p class="show__info-title">商品名<span class="form__required">必須</span></p>
-            <input class="show__info-input" name="name" value="" placeholder="商品名を入力">
-            <p class="form__error">
-                @error('name')
-                {{ $message }}
-                @enderror
-            </p>
-            <p class="show__info-title">値段<span class="form__required">必須</span></p>
-            <input class="show__info-input" name="price" value="" placeholder="値段を入力">
-            <p class="form__error">
-                @error('price')
-                {{ $message }}
-                @enderror
-            </p>
-            <p class="show__info-title">商品画像<span class="form__required">必須</span></p>
-            <p class="show__image-info">
-                <label for="form-image">ファイルを選択</label>
+    <div class="sell-group">
+        <div class="sell__info">
+            <h3 class="sell__info-title">商品画像</h3>
+            <p class="sell__image-info">
+                <label for="form-image">ファイルを選択する</label>
                 <input type="file" name="image" id="form-image">
                 <span class="select-image"></span>
             </p>
@@ -38,31 +23,69 @@
                 {{ $message }}
                 @enderror
             </p>
-            <p class="show__info-title">季節<span class="form__required">必須</span><span class="color-red">複数選択可</span></p>
-            <div class="show__input--checkbox">
-                @foreach ($allseasons as $allseason)
-                <input class="show-checkbox" type="checkbox" name="allseason_ids[]" value="{{ $allseason->id }}" /><label>{{ $allseason->name }}</label>
+            <h2 class="sell__info-title">商品詳細</h2>
+            <h3 class="sell__info-title">カテゴリー</h3>
+            <div class="sell__input--checkbox">
+                @foreach ($allcategories as $allcategory)
+                <input class="hidden-checkbox" type="checkbox" id="category_{{ $allcategory->id }}" name="allcategory_ids[]" value="{{ $allcategory->id }}">
+                <label for="category_{{ $allcategory->id }}" ><span>{{ $allcategory->name }}</span></label>
                 @endforeach
             </div>
             <p class="form__error">
-                @error('allseason_ids')
+                @error('allcategory_ids')
                 {{ $message }}
                 @enderror
             </p>
-            <div class="show__description">
-            <p class="show__info-title">商品説明<span class="form__required">必須</span></p>
-            <textarea class="show__info-input description-box" name="description" value="" placeholder="商品の説明を入力"></textarea>
+            <h3 class="sell__info-title">商品の状態</h3>
+            <div class="sell__input--select">
+                <select class="form__item-condition-select" name="condition" id="condition">
+                    <option type="hidden">選択してください</option>
+                    <option value="1">良好</option>
+                    <option value="2">目立った傷や汚れなし</option>
+                    <option value="3">やや傷や汚れあり</option>
+                    <option value="4">状態が悪い</option>
+                </select>
+            </div>
+            <p class="form__error">
+                @error('condition')
+                {{ $message }}
+                @enderror
+            </p>
+
+            <h2 class="sell__info-title">商品名と説明</h2>
+            <h3 class="sell__info-title">商品名</h3>
+            <input class="sell__info-input" name="name" value="" placeholder="商品名を入力">
+            <p class="form__error">
+                @error('name')
+                {{ $message }}
+                @enderror
+            </p>
+            <h3 class="sell__info-title">ブランド</h3>
+            <input class="sell__info-input" name="brand" value="" placeholder="ブランドを入力">
+            <p class="form__error">
+                @error('brand')
+                {{ $message }}
+                @enderror
+            </p>
+            <h3 class="sell__info-title">商品説明</h3>
+            <textarea class="sell__info-input description-box" name="description" value="" placeholder="商品の説明を入力"></textarea>
             <p class="form__error">
                 @error('description')
                 {{ $message }}
                 @enderror
             </p>
-            </div>
+            <h3 class="sell__info-title">販売価格</h3>
+            <input class="sell__info-input" name="price" value="" placeholder="¥">
+            <p class="form__error">
+                @error('price')
+                {{ $message }}
+                @enderror
+            </p>
         </div>
     </div>
-    <div class="show-form__btn-inner">
-        <a class="show-form__back-btn btn" href="/">戻る</a>
-        <input class="show-form__send-btn btn" type="submit" value="商品登録" name="send">
+    <div class="sell-form__btn-inner">
+        <a class="sell-form__back-btn btn" href="/">戻る</a>
+        <input class="sell-form__send-btn btn" type="submit" value="出品する" name="sell">
     </div>
 </form>
 @endsection

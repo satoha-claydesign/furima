@@ -31,6 +31,8 @@ Route::get('/recommend', [ItemController::class, 'index']);
 Route::middleware('auth')->group(function () {
     Route::get('/mypage/profile', [UserController::class, 'profile']);
     Route::get('/mypage', [UserController::class, 'index'])->name('mypage');
+    Route::get('/mysell', [UserController::class, 'mySell']);
+    Route::get('/myorder', [UserController::class, 'myOrder']);
     Route::get('/profile', [UserController::class, 'profile']);
     Route::patch('/mypage/update', [UserController::class, 'update']);
     Route::post('/item/{id}/likes', [LikeController::class, 'likeItem']);
@@ -41,6 +43,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/purchase/{id}/address', [OrderController::class, 'address']);
     Route::patch('/purchase/{id}/changeAddress', [OrderController::class, 'updateAddress'])->name('purchase.index');
     Route::patch('/complete/{id}', [OrderController::class, 'complete']);
+    Route::get('/sell', [ItemController::class, 'sell'])->name('item.sell');
+    Route::post('/item/store', [ItemController::class, 'store']);
 });
 
 
