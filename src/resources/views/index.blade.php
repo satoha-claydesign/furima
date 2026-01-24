@@ -20,17 +20,20 @@
 </div>
 <div class="item__inner">
     <div class="item__tab">
-        <form action="/recommend" method="get">
-            <input type="hidden" name="tab-group" id="tab1" checked class="tab-input">
-            <button for="tab1" class="tab-label item__tab-recommend">おすすめ</button>
+        <form action="/" method="get">
+            <input type="hidden" name="tab" value="recommend" class="tab-input">
+            <button class="tab-label item__tab-recommend @if (isset($tab) && $tab === "recommend") tab-checked @endif">おすすめ</button>
         </form>
-        <form action="/mylist" method="get">
-            <input type="hidden" name="tab-group" id="tab2" class="tab-input">
-            <button type="submit" for="tab2" class="tab-label item__tab-mypage">マイリスト</button>
+        <form action="/" method="get">
+            <input type="hidden" name="tab" value="mylist">
+            <button type="submit" class="tab-label item__tab-mylist @if (isset($tab) && $tab === "mylist") tab-checked @endif">
+                マイリスト
+            </button>
         </form>
     </div>
 
-    <div class="item__content" id="content1">
+    <div class="item__content">
+        
         <div class="flex__item wrap">
             @foreach($items as $item)
             <a class="item__card-box" href="/item/{{ $item->id }}">

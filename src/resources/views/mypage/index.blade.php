@@ -24,13 +24,14 @@
     <div class="mypage__list">
         <div class="item__inner">
             <div class="item__tab">
-                <form action="/mysell" method="get">
-                    <input type="hidden" name="tab-group" id="tab1" class="tab-input">
-                    <button type="submit" for="tab2" class="tab-label item__tab-mypage">出品した商品</button>
+                <form action="/mypage" method="get">
+
+                    <input type="hidden" name="page" value="sell" class="tab-input">
+                    <button type="submit" for="tab2" class="tab-label item__tab-mypage @if (isset($page) && $page === "sell") page-checked @endif">出品した商品</button>
                 </form>
-                <form action="/myorder" method="get">
-                    <input type="hidden" name="tab-group" id="tab1" checked class="tab-input">
-                    <button for="tab1" class="tab-label item__tab-recommend">購入した商品</button>
+                <form action="/mypage" method="get">
+                    <input type="hidden" name="page" value="buy" class="tab-input ">
+                    <button for="tab2" class="tab-label item__tab-recommend @if (isset($page) && $page === "buy") page-checked @endif">購入した商品</button>
                 </form>
             </div>
 

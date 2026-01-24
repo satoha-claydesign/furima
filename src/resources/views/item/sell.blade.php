@@ -75,7 +75,10 @@
                 @enderror
             </p>
             <h3 class="sell__info-title">販売価格</h3>
-            <input class="sell__info-input" name="price" value="" placeholder="¥">
+            <div class="input-container">
+                <span class="currency">¥</span>
+                <input class="sell__info-input price-input" name="price" value="">
+            </div>
             <p class="form__error">
                 @error('price')
                 {{ $message }}
@@ -84,7 +87,6 @@
         </div>
     </div>
     <div class="sell-form__btn-inner">
-        <a class="sell-form__back-btn btn" href="/">戻る</a>
         <input class="sell-form__send-btn btn" type="submit" value="出品する" name="sell">
     </div>
 </form>

@@ -14,14 +14,39 @@ use Illuminate\Support\Facades\Storage;
 class UserController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
         if (Auth::check()) {
             $user = auth()->user()->load('profile');
             $items = Item::all();
 
-            return view('mypage.index', compact('user', 'items')); // mypage.indexビューにデータを渡す
-        } else {
+            if ($request->page) {
+                $page = $request->page;
+                if ($page === 'sell'){
+                    $user = auth()->user()->load('sells');
+                    $user_id = $user->id;
+                    $items = Item::with('sell')->whereHas('sell', function($query) use ($user_id) {
+                    $query->where('user_id', $user_id);
+                    })->get();
+                return view('mypage.index', compact('user', 'items', 'page') );
+                }
+                elseif  ($page === 'buy') {
+                    $user = auth()->user()->load('orders');
+                    $user_id = $user->id;
+                    $items = Item::with('orders')->whereHas('orders', function($query) use ($user_id) {
+                    $query->where('user_id', $user_id)->where('status', 'complete');
+                    })->get();
+                    return view('mypage.index', compact('user', 'items', 'page') );
+                }
+                else {
+                    return view('mypage.index', compact('user', 'items', 'page') );
+                }
+            }
+            else {
+                    return view('mypage.index', compact('user', 'items') );
+            }
+        }
+        else {
             return redirect('/login');
         }
     }

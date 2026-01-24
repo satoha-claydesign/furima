@@ -75,15 +75,8 @@ button.tab-label {
     cursor: pointer;
 }
 
-.item__tab-recommend {
+.page-checked {
     color: #ff0000;
-    cursor: pointer;
-}
-
-.item__tab-mypage a {
-    text-decoration: none;
-    cursor: pointer;
-    color: #000;
 }
 
 /* ラジオボタン自体は非表示にする */

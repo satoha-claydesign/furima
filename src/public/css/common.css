@@ -27,6 +27,7 @@ form.keyword-search {
     display: flex;
     font-size: 14px;
     align-items: center;
+    height: 40px;
 }
 
 .header-nav__link {
@@ -47,6 +48,7 @@ button.header-nav__link {
     padding: 10px 20px;
     border-radius: 3px;
     color: #000;
+    cursor: pointer;
 }
 
 

@@ -24,20 +24,16 @@ Route::get('/', [ItemController::class, 'index']);
 Route::get('/search', [ItemController::class, 'search']);
 Route::get('/item/{id}', [ItemController::class, 'show'])->name('item.show');
 Route::post('/item/{id}/comment', [CommentController::class, 'comment']);
-Route::get('/recommend', [ItemController::class, 'index']);
-
 
 
 Route::middleware('auth')->group(function () {
     Route::get('/mypage/profile', [UserController::class, 'profile']);
     Route::get('/mypage', [UserController::class, 'index'])->name('mypage');
-    Route::get('/mysell', [UserController::class, 'mySell']);
-    Route::get('/myorder', [UserController::class, 'myOrder']);
+    
     Route::get('/profile', [UserController::class, 'profile']);
     Route::patch('/mypage/update', [UserController::class, 'update']);
     Route::post('/item/{id}/likes', [LikeController::class, 'likeItem']);
     Route::post('/item/{id}/dislikes', [LikeController::class, 'dislikeItem']);
-    Route::get('/mylist', [LikeController::class, 'myList']);
     Route::get('/purchase/{id}', [OrderController::class, 'purchase'])->name('purchase.index');
     Route::post('/payment/{id}', [OrderController::class, 'payment']);
     Route::get('/purchase/{id}/address', [OrderController::class, 'address']);
@@ -48,4 +44,3 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/', [ItemController::class, 'indexLogin']);

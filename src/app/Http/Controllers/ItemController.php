@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Item;
+use App\Models\Like;
 use App\Models\Comment;
 use App\Models\User;
 use App\Models\Order;
@@ -14,21 +15,59 @@ use Illuminate\Support\Facades\Auth;
 class ItemController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request, Item $item, Like $like)
     {
-        $categories = Category::all();
-        $items = Item::with('orders')->get();
+        $items = Item::all();
         $orders = Order::all();
-        $conditions = config('condition');
-        return view('index', compact('items', 'categories', 'orders'));
+
+        if (Auth::check()) {
+            // ログインユーザーのidを取得
+            $user = auth()->user()->load('likes');
+            $user_id = $user->id;
+
+            if ($request->tab) {
+                $tab = $request->tab;
+            // お気に入りリストの取得
+                if ($tab === 'mylist'){
+                    $items = Item::with(['likes', 'sell'])
+                    // 条件1：自分が出品していない (sellリレーションが存在しない、または user_id が自分ではない)
+                    ->whereDoesntHave('sell', function($query) use ($user_id) {
+                        $query->where('user_id', $user_id);
+                    })
+                    // 条件2：かつ、自分がいいねしている
+                    ->whereHas('likes', function($query) use ($user_id) {
+                        $query->where('user_id', $user_id);
+                    })
+                    ->get();
+                    return view('index', compact('items', 'tab'));
+                }
+                else {
+                    $items = Item::with(['likes', 'sell'])
+                    ->whereDoesntHave('sell', function($query) use ($user_id) {
+                        $query->where('user_id', $user_id);
+                    })
+                    ->get();
+                    return view('index', compact('items', 'orders', 'tab'));
+                }
+            }
+            else {
+                $items = Item::with(['likes', 'sell'])
+                    ->whereDoesntHave('sell', function($query) use ($user_id) {
+                        $query->where('user_id', $user_id);
+                    })
+                    ->get();
+                return view('index', compact('items'));
+            }
+        }
+        else {
+            $items = Item::all();
+            return view('index', compact('items'));
+        }
     }
 
     public function indexLogin()
     {
-        $categories = Category::all();
-        $items = Item::all();
-        $conditions = config('condition');
-        return view('index', ['items' => $items],['categories' => $categories]);
+        return view('index', compact('items'));
     }
 
     public function search(Request $request)
@@ -51,7 +90,7 @@ class ItemController extends Controller
     {
         $item = Item::withCount('likes')->with('orders')->find($id);
         $likesCount = $item->likes_count;
-        
+
         $orders = Order::find($item->order_id);
         $categories = Item::find($id)->categories();
         $allcategories = Category::all();
