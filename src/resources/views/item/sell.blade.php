@@ -38,8 +38,8 @@
             </p>
             <h3 class="sell__info-title">商品の状態</h3>
             <div class="sell__input--select">
-                <select class="form__item-condition-select" name="condition" id="condition">
-                    <option type="hidden">選択してください</option>
+                <select class="form__item-condition-select" name="condition">
+                    <option value="" disabled selected hidden>選択してください</option>
                     <option value="1">良好</option>
                     <option value="2">目立った傷や汚れなし</option>
                     <option value="3">やや傷や汚れあり</option>

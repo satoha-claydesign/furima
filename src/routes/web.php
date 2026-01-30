@@ -22,22 +22,21 @@ use App\Http\Controllers\OrderController;
 
 Route::get('/', [ItemController::class, 'index']);
 Route::get('/search', [ItemController::class, 'search']);
-Route::get('/item/{id}', [ItemController::class, 'show'])->name('item.show');
-Route::post('/item/{id}/comment', [CommentController::class, 'comment']);
+Route::get('/item/{id}', [ItemController::class, 'show']);
 
 
 Route::middleware('auth')->group(function () {
     Route::get('/mypage/profile', [UserController::class, 'profile']);
     Route::get('/mypage', [UserController::class, 'index'])->name('mypage');
-    
     Route::get('/profile', [UserController::class, 'profile']);
     Route::patch('/mypage/update', [UserController::class, 'update']);
     Route::post('/item/{id}/likes', [LikeController::class, 'likeItem']);
     Route::post('/item/{id}/dislikes', [LikeController::class, 'dislikeItem']);
+    Route::get('/item/{id}/comment', [CommentController::class, 'comment'])->name('item.show');
+    Route::get('/purchase/{id}/address', [OrderController::class, 'address'])->name('purchase.index');
+    Route::patch('/purchase/{id}/update', [OrderController::class, 'updateAddress']);
+    Route::patch('/payment/{id}', [OrderController::class, 'payment']);
     Route::get('/purchase/{id}', [OrderController::class, 'purchase'])->name('purchase.index');
-    Route::post('/payment/{id}', [OrderController::class, 'payment']);
-    Route::get('/purchase/{id}/address', [OrderController::class, 'address']);
-    Route::patch('/purchase/{id}/changeAddress', [OrderController::class, 'updateAddress'])->name('purchase.index');
     Route::patch('/complete/{id}', [OrderController::class, 'complete']);
     Route::get('/sell', [ItemController::class, 'sell'])->name('item.sell');
     Route::post('/item/store', [ItemController::class, 'store']);

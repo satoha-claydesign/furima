@@ -23,17 +23,23 @@
             <h2>お支払い方法</h2>
             <form action="/payment/{id}" method="post" class="payment-form">
                 @csrf
+                @method('PATCH')
                 <input type="hidden" name="item_id" value="{{ $item->id }}">
                 <input type="hidden" name="order_id" value="{{ $order->id }}">
                 <select class="form__category__item-select" name="payment" id="payment" onchange="this.form.submit()">
                     <option type="hidden">選択してください</option>
-                    <option @if (!empty($payment)) @if($payment === "1") selected @endif @endif value="1">
+                    <option @if (!empty($order->payment)) @if($order->payment == "1") selected @endif @endif value="1">
                         コンビニ払い
                     </option>
-                    <option  @if (!empty($payment)) @if($payment === "2") selected @endif @endif value="2">
+                    <option  @if (!empty($order->payment)) @if($order->payment == "2") selected @endif @endif value="2">
                         クレジットカード払い
                     </option>
                 </select>
+                <div class="form__error">
+                    @error('payment')
+                    {{ $message }}
+                    @enderror
+                </div>
             </form>
         </div>
         <div class="address-group">
@@ -67,9 +73,9 @@
             <tr>
                 <th>支払い方法</th>
                 <td>@if (!empty($order))
-                        @if($order->payment === "1")
+                        @if($order->payment == "1")
                             コンビニ払い
-                        @elseif($order->payment === "2")
+                        @elseif($order->payment == "2")
                             クレジットカード払い
                         @else
                             未選択

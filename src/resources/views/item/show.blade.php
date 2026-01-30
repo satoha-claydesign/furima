@@ -69,6 +69,7 @@
                     </div>
                 @else
                     <form action="/purchase/{id}" method="get">
+                        @csrf
                         <div class="show-form__btn-inner">
                             <input type="hidden" name="id" value="{{ $item->id }}">
                             <button class="show-form__send-btn btn" type="submit" value="{{ $item->id }}">購入手続き</button>
@@ -130,9 +131,14 @@
             </div>
             <div class="show__comment-input">
                 <h4>商品へのコメント</h4>
-                <form action="/item/{id}/comment" class="show-form__btn-inner" method="post">
-                @csrf
-                    <textarea type="text" name="body"></textarea>
+                <form action="/item/{id}/comment" class="show-form__btn-inner" method="get">
+                
+                    <textarea type="text" name="body" value="{{ old('body') }}"></textarea>
+                    <div class="form__error">
+                        @error('body')
+                        {{ $message }}
+                        @enderror
+                    </div>
                     <input type="hidden" name="id" value="{{ $item->id }}">
                     <button class="show-form__send-btn btn" type="submit">コメントを送信する</button>
                 </form>

@@ -7,6 +7,7 @@ use App\Models\Profile;
 use App\Models\Item;
 use App\Models\Sell;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProfileRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,15 +23,7 @@ class UserController extends Controller
 
             if ($request->page) {
                 $page = $request->page;
-                if ($page === 'sell'){
-                    $user = auth()->user()->load('sells');
-                    $user_id = $user->id;
-                    $items = Item::with('sell')->whereHas('sell', function($query) use ($user_id) {
-                    $query->where('user_id', $user_id);
-                    })->get();
-                return view('mypage.index', compact('user', 'items', 'page') );
-                }
-                elseif  ($page === 'buy') {
+                if  ($page === 'buy') {
                     $user = auth()->user()->load('orders');
                     $user_id = $user->id;
                     $items = Item::with('orders')->whereHas('orders', function($query) use ($user_id) {
@@ -39,10 +32,20 @@ class UserController extends Controller
                     return view('mypage.index', compact('user', 'items', 'page') );
                 }
                 else {
-                    return view('mypage.index', compact('user', 'items', 'page') );
+                    $user = auth()->user()->load('sells');
+                    $user_id = $user->id;
+                    $items = Item::with('sell')->whereHas('sell', function($query) use ($user_id) {
+                    $query->where('user_id', $user_id);
+                    })->get();
+                return view('mypage.index', compact('user', 'items', 'page') );
                 }
             }
             else {
+                    $user = auth()->user()->load('sells');
+                    $user_id = $user->id;
+                    $items = Item::with('sell')->whereHas('sell', function($query) use ($user_id) {
+                    $query->where('user_id', $user_id);
+                    })->get();
                     return view('mypage.index', compact('user', 'items') );
             }
         }
@@ -51,41 +54,6 @@ class UserController extends Controller
         }
     }
 
-    public function mySell(Item $item, Sell $sell)
-    {
-        if (Auth::check()) {
-            // ログインユーザーのidを取得
-            $user = auth()->user()->load('sells');
-            $user_id = $user->id;
-            $items = Item::with('sell')->whereHas('sell', function($query) use ($user_id) {
-            $query->where('user_id', $user_id);
-            })->get();
-
-            // フロントにいいねの数を返す
-            return view('mypage.index', compact('user', 'items') );
-        }
-        else {
-            return redirect('/login');
-        }
-    }
-
-    public function myOrder(Item $item, Sell $sell)
-    {
-        if (Auth::check()) {
-            // ログインユーザーのidを取得
-            $user = auth()->user()->load('orders');
-            $user_id = $user->id;
-            $items = Item::with('orders')->whereHas('orders', function($query) use ($user_id) {
-            $query->where('user_id', $user_id)->where('status', 'complete');
-            })->get();
-
-            // フロントにいいねの数を返す
-            return view('mypage.index', compact('user', 'items') );
-        }
-        else {
-            return redirect('/login');
-        }
-    }
 
     public function profile()
     {
@@ -97,12 +65,13 @@ class UserController extends Controller
         }
     }
 
-    public function update(Request $request, User $user)
+    public function update(ProfileRequest $request, User $user)
     {
+        $validated = $request->validated();
         $user = User::with(['profile'])->find($request->id);
         // User情報の更新
         $user->update([
-            'name' => $request->name,
+            'name' => $validated['name'],
         ]);
 
         if ($request->hasFile('image')) {

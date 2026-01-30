@@ -67,6 +67,10 @@ h1 {
     text-align: center;
     box-shadow: 2px 2px 4px #b5b4b4;
 }
+.register__button-submit {
+    text-decoration: none;
+    color: #127ccf;
+}
 
 .register__link {
     margin-top: 20px;

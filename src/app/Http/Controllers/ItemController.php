@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\Sell;
 use Illuminate\Http\Request;
+use App\Http\Requests\ExhibitionRequest;
 use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
@@ -113,7 +114,7 @@ class ItemController extends Controller
             ];
         })->toArray();
 
-        return view('item.show', compact('item', 'categories', 'orders', 'allcategories', 'likesCount', 'commentsCount', 'comments','userComments'), [$userComments = 'userComments']); // posts.showビューにデータを渡す
+        return view('item.show', compact('item', 'categories', 'orders', 'allcategories', 'likesCount', 'commentsCount', 'comments','userComments'), [$userComments = 'userComments']);
     }
 
     public function sell()
@@ -126,7 +127,7 @@ class ItemController extends Controller
         return view('item.sell', compact('items', 'categories', 'allcategories', 'orders'));
     }
 
-    public function store(Request $request, Item $item, Sell $sell)
+    public function store(ExhibitionRequest $request, Item $item, Sell $sell)
     {
         if ($request->has('back')) {
             return redirect('/')->withInput();

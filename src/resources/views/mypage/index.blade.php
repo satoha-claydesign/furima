@@ -16,8 +16,8 @@
             </div>
             <p class="mypage__profile-name">{{ $user->name }}</p>
         </div>
-        <form action="/profile" method="get">
-            @csrf
+        <form action="/mypage/profile" method="get">
+
             <button type="submit" name="send" >プロフィールを編集</button>
         </form>
     </div>
@@ -27,7 +27,7 @@
                 <form action="/mypage" method="get">
 
                     <input type="hidden" name="page" value="sell" class="tab-input">
-                    <button type="submit" for="tab2" class="tab-label item__tab-mypage @if (isset($page) && $page === "sell") page-checked @endif">出品した商品</button>
+                    <button type="submit" for="tab2" class="tab-label item__tab-mypage @if (in_array($page ?? 'sell', ['sell'])) page-checked @endif">出品した商品</button>
                 </form>
                 <form action="/mypage" method="get">
                     <input type="hidden" name="page" value="buy" class="tab-input ">
@@ -42,6 +42,14 @@
                         <div class="item__card">
                             <div class="card__img">
                                 <img src="{{ asset('storage/images/' . $item->image) }}" alt="" />
+                                <!-- soldラベル -->
+                                @if (!empty($item->orders))
+                                    @foreach ($item->orders as $order)
+                                        @if ($order->status === "complete")
+                                        <div class="sold-label">SOLD</div>
+                                        @endif
+                                    @endforeach
+                                @endif
                             </div>
                             <div class="card__content">
                                 <div class="tag">

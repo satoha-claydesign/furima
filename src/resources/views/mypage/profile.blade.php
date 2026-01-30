@@ -8,7 +8,7 @@
 <h1>プロフィール設定</h1>
 <div class="profile__inner">
 
-<form action="/mypage/update" method="post" enctype="multipart/form-data">
+<form action="/mypage/update" method="post" enctype="multipart/form-data" novalidate>
     @method('PATCH')
     @csrf
     <div class="profile-group">
@@ -39,9 +39,9 @@
             </p>
             <p class="profile__info-title">郵便番号</p>
             @if (!empty($user->profile->postalCode))
-            <input class="profile__info-input" name="postalCode" value="{{ $user->profile->postalCode }}">
+            <input class="profile__info-input" name="postalCode" value="{{ $user->profile->postalCode }}" maxlength="8" pattern="\d{3}-\d{4}">
             @else
-            <input class="profile__info-input" name="postalCode" placeholder="0000000">
+            <input class="profile__info-input" name="postalCode" placeholder="123-4567" maxlength="8" pattern="\d{3}-\d{4}">
             @endif
             <p class="form__error">
                 @error('postalCode')
