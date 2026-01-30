@@ -23,9 +23,9 @@ class OrderController extends Controller
             $order = Order::create([
             'item_id' => $item->id,
             'user_id' => Auth::id(),
-            'order_postalCode'  => $user->profile->postalCode,
-            'order_address'  => $user->profile->address,
-            'order_building'  => $user->profile->building,
+            'order_postalCode'  => $user->profile?->postalCode,
+            'order_address'  => $user->profile?->address,
+            'order_building'  => $user->profile?->building,
             'payment' => '1',
             'status' => 'pending',
         ]);
@@ -84,7 +84,7 @@ class OrderController extends Controller
         return view('purchase.index', compact('user', 'item', 'order'));
     }
 
-    public function complete($id, Item $item, Order $order, Request $request)
+    public function complete($id, Item $item, Order $order, PurchaseRequest $request)
     {
         $order = Order::find($request->order_id);
         $order->status = 'complete';

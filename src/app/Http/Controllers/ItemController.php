@@ -30,17 +30,33 @@ class ItemController extends Controller
                 $tab = $request->tab;
             // お気に入りリストの取得
                 if ($tab === 'mylist'){
-                    $items = Item::with(['likes', 'sell'])
-                    // 条件1：自分が出品していない (sellリレーションが存在しない、または user_id が自分ではない)
-                    ->whereDoesntHave('sell', function($query) use ($user_id) {
-                        $query->where('user_id', $user_id);
-                    })
-                    // 条件2：かつ、自分がいいねしている
-                    ->whereHas('likes', function($query) use ($user_id) {
-                        $query->where('user_id', $user_id);
-                    })
-                    ->get();
-                    return view('index', compact('items', 'tab'));
+                        if (!empty($request->keyword)){
+                            $items = Item::with(['likes', 'sell'])
+                            ->whereDoesntHave('sell', function($query) use ($user_id) {
+                                $query->where('user_id', $user_id);
+                            })
+                            ->whereHas('likes', function($query) use ($user_id) {
+                                $query->where('user_id', $user_id);
+                            })
+                            ->where(function ($q) use ($request) {
+                                $q->where('name', 'like', '%' . $request->keyword . '%');
+                            })
+                            ->get();
+                            return view('index', compact('items', 'tab'));
+                        }
+                        else {
+                            $items = Item::with(['likes', 'sell'])
+                            // 条件1：自分が出品していない (sellリレーションが存在しない、または user_id が自分ではない)
+                            ->whereDoesntHave('sell', function($query) use ($user_id) {
+                                $query->where('user_id', $user_id);
+                            })
+                            // 条件2：かつ、自分がいいねしている
+                            ->whereHas('likes', function($query) use ($user_id) {
+                                $query->where('user_id', $user_id);
+                            })
+                            ->get();
+                            return view('index', compact('items', 'tab'));
+                        }
                 }
                 else {
                     $items = Item::with(['likes', 'sell'])

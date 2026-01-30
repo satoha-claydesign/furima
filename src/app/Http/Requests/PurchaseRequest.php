@@ -34,6 +34,12 @@ class PurchaseRequest extends FormRequest
             ],
             'order_address' => 'sometimes|required',
             'order_building' => 'sometimes|required',
+            'status' => [
+                'sometimes',
+                'string',
+                'prohibits:order_postalCode,null',
+                'prohibits:order_address,null',
+            ]
         ];
     }
 
@@ -46,6 +52,7 @@ class PurchaseRequest extends FormRequest
             'order_postalCode.size' => '郵便番号は8文字で入力してください',
             'order_address.required' => '住所を入力してください',
             'order_building.required' => '建物を入力してください',
+            'status.prohibits' => '住所を入力してください'
         ];
     }
 }

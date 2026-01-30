@@ -133,7 +133,7 @@ h2.item__info-title {
 .show-form__sold-btn {
     background: #b1b1b1;
     color: #000000;
-    cursor: none;
+    cursor: default;
 }
 
 

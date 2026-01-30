@@ -19,9 +19,9 @@ class CreateOrdersTable extends Migration
             // 商品とのリレーション
             $table->foreignId('item_id')->constrained('items')->onDelete('cascade');
             $table->integer('payment');// 支払い方法 1:'コンビニ払い', 2:'クレジットカード払い'
-            $table->string('order_postalCode');
-            $table->string('order_address');
-            $table->string('order_building');
+            $table->string('order_postalCode')->nullable();
+            $table->string('order_address')->nullable();
+            $table->string('order_building')->nullable();
             $table->string('status'); // 例: 'pending', 'completed'
             $table->timestamps();
         });

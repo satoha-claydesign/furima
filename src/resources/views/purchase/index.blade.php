@@ -53,13 +53,16 @@
             </div>
             <div class="profile__address">
                 <p class="profile__info-title">〒 @if (!empty($order->order_postalCode)) {{ $order->order_postalCode }}
-                                                @else {{ $user->profile->postalCode }}
+                                                @elseif (!empty($user->profile->postalCode)) {{ $user->profile->postalCode }}
+                                                @else 未入力
                                                 @endif</p>
                 <p class="profile__info-title">@if (!empty($order->order_address)) {{ $order->order_address }}
-                                                @else {{ $user->profile->address }}
+                                                @elseif (!empty($user->profile->address)) {{ $user->profile->address }}
+                                                @else 住所未入力
                                                 @endif</p>
                 <p class="profile__info-title">@if (!empty($order->order_building)) {{ $order->order_building }}
-                                                @else {{ $user->profile->building }}
+                                                @elseif (!empty($user->profile->building)) {{ $user->profile->building }}
+                                                @else 
                                                 @endif</p>
             </div>
         </div>
@@ -90,6 +93,10 @@
                 <div class="purchase-form__btn-inner">
                     <p class="show-form__sold-btn btn">購入済</p>
                 </div>
+            @elseif (empty($order->order_postalCode && $order->order_address))
+                <div class="purchase-form__btn-inner">
+                    <p class="show-form__sold-btn btn">購入する</p>
+                </div>
             @else
                 <form action="/complete/{id}" method="post">
                     @csrf
@@ -99,6 +106,11 @@
                             <input type="hidden" name="order_id" value="{{ $order->id }}">
                             <button class="show-form__send-btn btn" type="submit">購入する</button>
                         </div>
+                        <p class="form__error">
+                            @error('status')
+                            {{ $message }}
+                            @enderror
+                        </p>
                 </form>
             @endif
         @endif

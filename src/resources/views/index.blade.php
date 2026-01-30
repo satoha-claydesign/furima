@@ -26,6 +26,7 @@
         </form>
         <form action="/" method="get">
             <input type="hidden" name="tab" value="mylist">
+            <input type="hidden" name="keyword" value="{{ request('keyword') }}">
             <button type="submit" class="tab-label item__tab-mylist @if (isset($tab) && $tab === "mylist") tab-checked @endif">
                 マイリスト
             </button>
