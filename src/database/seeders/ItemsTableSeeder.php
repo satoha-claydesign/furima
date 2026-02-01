@@ -67,7 +67,7 @@ class ItemsTableSeeder extends Seeder
             'name' => 'マイク',
             'price' => '8000',
             'brand'=> 'なし',
-            'description' => 'ス高音質のレコーディング用マイク',
+            'description' => '高音質のレコーディング用マイク',
             'condition' => '2',
             ],
             [
@@ -103,7 +103,7 @@ class ItemsTableSeeder extends Seeder
             'name' => 'メイクセット',
             'price' => '2500',
             'brand'=> '',
-            'description' => 'ス便利なメイクアップセット',
+            'description' => '便利なメイクアップセット',
             'condition' => '2',
             ],
         ]);
