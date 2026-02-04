@@ -77,7 +77,12 @@ class ItemController extends Controller
             }
         }
         else {
-            $items = Item::all();
+            if ($request->tab === 'mylist'){
+                $items = ($request->tab === 'mylist') ? collect() : Item::all();
+            }
+            else {
+                $items = Item::all();
+            }
             return view('index', compact('items'));
         }
     }

@@ -34,7 +34,7 @@
                             @csrf
                                 <input type="hidden" name="id" value="{{ $item->id }}">
                                 <button class="show__form__likes" type="submit" value=""><img class="show__form__likes-mark" src="{{ asset('storage/images/likes_gray.png') }}" alt=""></button>
-                        </form>
+                            </form>
                         @endif
                         <p>
                             @if ($item->likes_count)
@@ -44,9 +44,11 @@
                             @endif
                         </p>
                     @else
-                        <p class="¥show__form-likes">
-                            <button class="show__form__likes" type="" value=""><img class="show__form__likes-mark" src="{{ asset('storage/images/likes_gray.png') }}" alt=""></button>
-                        </p>
+                        <form class="show__form-likes" action="/item/{id}/likes" method="post">
+                        @csrf
+                            <input type="hidden" name="id" value="{{ $item->id }}">
+                            <button class="show__form__likes" type="submit" value=""><img class="show__form__likes-mark" src="{{ asset('storage/images/likes_gray.png') }}" alt=""></button>
+                        </form>
                         <p>
                             @if ($item->likes_count)
                             {{ $item->likes_count }}
@@ -77,7 +79,7 @@
                     </form>
                 @endif
             @endif
-            
+
             <!-- 商品説明 -->
             <h3 class="show__info-title">商品説明</h3>
             <p class="show__info-description">{{ $item->description }}</p>
@@ -132,7 +134,6 @@
             <div class="show__comment-input">
                 <h4>商品へのコメント</h4>
                 <form action="/item/{id}/comment" class="show-form__btn-inner" method="get">
-                
                     <textarea type="text" name="body" value="{{ old('body') }}"></textarea>
                     <div class="form__error">
                         @error('body')
@@ -146,6 +147,5 @@
         </div>
     </div>
 </div>
-    
 
 @endsection

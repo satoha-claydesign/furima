@@ -25,7 +25,7 @@ Route::get('/search', [ItemController::class, 'search']);
 Route::get('/item/{id}', [ItemController::class, 'show']);
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/mypage/profile', [UserController::class, 'profile']);
     Route::get('/mypage', [UserController::class, 'index'])->name('mypage');
     Route::get('/profile', [UserController::class, 'profile']);

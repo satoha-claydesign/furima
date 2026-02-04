@@ -1,3 +1,7 @@
+.search-form__item {
+    display: none;
+}
+
 .header {
     border: none;
 }

@@ -75,7 +75,10 @@ return [
     */
 
     'home' => '/mypage/profile',
-    'redirects' => ['login' => '/mypage',],
+    'redirects' => [
+        'login' => '/mypage',
+        'logout' => '/', // ログアウト後にログイン画面へ遷移
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -148,7 +151,7 @@ return [
     'features' => [
         Features::registration(),
         Features::resetPasswords(),
-        // Features::emailVerification(),
+        Features::emailVerification(),
         Features::updateProfileInformation(),
         Features::updatePasswords(),
         Features::twoFactorAuthentication([

@@ -43,6 +43,11 @@
                 <button class="header-nav__link">ログアウト</button>
               </form>
             </li>
+            @else
+            <li class="header-nav__item">
+                <a href="/login" class="header-nav__link">ログイン</a>
+            </li>
+            @endif
             <li class="header-nav__item">
               <a class="header-nav__link" href="/mypage">マイページ</a>
             </li>
@@ -52,7 +57,6 @@
                 <button class="header-nav__link" type="submit" value="出品">出品</button>
               </form>
             </li>
-            @endif
           </ul>
         </nav>
       </div>

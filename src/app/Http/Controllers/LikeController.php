@@ -15,84 +15,92 @@ class LikeController extends Controller
 
     public function likeItem(Request $request, Item $item)
     {
+        if (Auth::check()) {
+            // ログインユーザーのidを取得
+            $user_id = Auth::id();
+            $item = Item::find($request->id);
+            $categories = $item->categories();
+            $allcategories = Category::all();
 
-        // ログインユーザーのidを取得
-        $user_id = Auth::id();
-        $item = Item::find($request->id);
-        $categories = $item->categories();
-        $allcategories = Category::all();
+            //「いいね」していない場合は，likesテーブルにレコードを追加
+            $like = new Like();
+            $like->user_id = $user_id;
+            $like->item_id = $item->id;
+            $like->save();
 
-        //「いいね」していない場合は，likesテーブルにレコードを追加
-        $like = new Like();
-        $like->user_id = $user_id;
-        $like->item_id = $item->id;
-        $like->save();
+            // いいねの数を取得
+            $item = Item::withCount('likes')->find($request->id);
+            $likesCount = $item->likes_count;
 
-        // いいねの数を取得
-        $item = Item::withCount('likes')->find($request->id);
-        $likesCount = $item->likes_count;
+            if ($item->comments) {
+                // 関連するコメントのコレクションを取得
+                $comments = $item->comments;
+            }
+            // 1. Controller側: Eager Loadingでデータを取得
+            $comments = Comment::with('user.profile')->where('item_id',$item->id)->get();
+            $commentsCount = $comments->count();
 
-        if ($item->comments) {
-            // 関連するコメントのコレクションを取得
-            $comments = $item->comments;
+            // 2. データの整形
+            $userComments = $comments->map(function ($comment) {
+                return [
+                    'id' => $comment->id,
+                    'commentUserName' => $comment->user->name ?? 'コメントしたユーザー',
+                    'commentUserImage' => $comment->user->profile->image ?? 'default.jpg',
+                    'commentBody' => $comment->body,
+                ];
+            })->toArray();
+
+            // フロントにいいねの数を返す
+            return view('item.show', compact('item', 'categories', 'allcategories', 'likesCount', 'commentsCount', 'comments','userComments'));
         }
-        // 1. Controller側: Eager Loadingでデータを取得
-        $comments = Comment::with('user.profile')->where('item_id',$item->id)->get();
-        $commentsCount = $comments->count();
-
-        // 2. データの整形
-        $userComments = $comments->map(function ($comment) {
-            return [
-                'id' => $comment->id,
-                'commentUserName' => $comment->user->name ?? 'コメントしたユーザー',
-                'commentUserImage' => $comment->user->profile->image ?? 'default.jpg',
-                'commentBody' => $comment->body,
-            ];
-        })->toArray();
-
-        // フロントにいいねの数を返す
-        return view('item.show', compact('item', 'categories', 'allcategories', 'likesCount', 'commentsCount', 'comments','userComments'));
+        else {
+            return redirect('/login');
+        }
     }
 
     public function dislikeItem(Request $request, Item $item)
     {
 
-        // ログインユーザーのidを取得
-        $user_id = Auth::id();
-        $item = Item::find($request->id);
-        $categories = $item->categories();
-        $allcategories = Category::all();
+        if (Auth::check()) {
+            // ログインユーザーのidを取得
+            $user_id = Auth::id();
+            $item = Item::find($request->id);
+            $categories = $item->categories();
+            $allcategories = Category::all();
 
-        $liked_item = $item->likes()->where('user_id', $user_id);
+            $liked_item = $item->likes()->where('user_id', $user_id);
 
-        // 既に「いいね」をしていた場合は，likesテーブルからレコードを削除
-        $liked_item->delete();
+            // 既に「いいね」をしていた場合は，likesテーブルからレコードを削除
+            $liked_item->delete();
 
-        // いいねの数を取得
-        // いいねの数を取得
-        $item = Item::withCount('likes')->find($request->id);
-        $likesCount = $item->likes_count;
+            // いいねの数を取得
+            // いいねの数を取得
+            $item = Item::withCount('likes')->find($request->id);
+            $likesCount = $item->likes_count;
 
-        if ($item->comments) {
-            // 関連するコメントのコレクションを取得
-            $comments = $item->comments;
+            if ($item->comments) {
+                // 関連するコメントのコレクションを取得
+                $comments = $item->comments;
+            }
+            // 1. Controller側: Eager Loadingでデータを取得
+            $comments = Comment::with('user.profile')->where('item_id',$item->id)->get();
+            $commentsCount = $comments->count();
+
+            // 2. データの整形
+            $userComments = $comments->map(function ($comment) {
+                return [
+                    'id' => $comment->id,
+                    'commentUserName' => $comment->user->name ?? 'コメントしたユーザー',
+                    'commentUserImage' => $comment->user->profile->image ?? 'default.jpg',
+                    'commentBody' => $comment->body,
+                ];
+            })->toArray();
+
+            // フロントにいいねの数を返す
+            return view('item.show', compact('item', 'categories', 'allcategories', 'likesCount', 'commentsCount', 'comments','userComments'));
         }
-        // 1. Controller側: Eager Loadingでデータを取得
-        $comments = Comment::with('user.profile')->where('item_id',$item->id)->get();
-        $commentsCount = $comments->count();
-
-        // 2. データの整形
-        $userComments = $comments->map(function ($comment) {
-            return [
-                'id' => $comment->id,
-                'commentUserName' => $comment->user->name ?? 'コメントしたユーザー',
-                'commentUserImage' => $comment->user->profile->image ?? 'default.jpg',
-                'commentBody' => $comment->body,
-            ];
-        })->toArray();
-
-        // フロントにいいねの数を返す
-        return view('item.show', compact('item', 'categories', 'allcategories', 'likesCount', 'commentsCount', 'comments','userComments'));
+        else {
+            return redirect('/login');
+        }
     }
-
 }

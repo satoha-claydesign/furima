@@ -34,6 +34,7 @@ form.keyword-search {
     color: #fff;
     text-decoration: none;
     padding: 0 20px;
+    cursor: pointer;
 }
 
 button.header-nav__link {

@@ -127,7 +127,7 @@ button.show__form__likes {
 .show-form__sold-btn {
     background: #b1b1b1;
     color: #000000;
-    cursor: none;
+    cursor: default;
 }
 
 .show__info-description, .show__info-category {

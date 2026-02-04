@@ -98,7 +98,7 @@ class OrderController extends Controller
         $categories = Category::all();
         $items = Item::all();
         $conditions = config('condition');
-        return view('index', compact('items', 'orders', 'categories'))->with('message', '購入が完了しました');
+        return redirect()->away('https://buy.stripe.com/test_6oUbJ14xZ2Qp8zz5gsbV600');
     }
 
 }
