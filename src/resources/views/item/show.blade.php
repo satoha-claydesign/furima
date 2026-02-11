@@ -60,7 +60,13 @@
                 </div>
                 <div class="show__comment">
                     <img class="show__form__comment-mark" src="{{ asset('storage/images/comment_logo.png') }}" alt="">
-                    <p>1</p>
+                    <p>
+                        @if ($commentsCount)
+                        {{ $commentsCount }}
+                        @else
+                        0
+                        @endif
+                    </p>
                 </div>
             </div>
             <!-- soldラベル -->

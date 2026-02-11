@@ -27,7 +27,7 @@ class ItemController extends Controller
             $user_id = $user->id;
 
             if ($request->tab) {
-                $tab = $request->tab;
+                $tab = $request->query('tab', 'recommend');
             // お気に入りリストの取得
                 if ($tab === 'mylist'){
                         if (!empty($request->keyword)){
@@ -73,17 +73,20 @@ class ItemController extends Controller
                         $query->where('user_id', $user_id);
                     })
                     ->get();
-                return view('index', compact('items'));
+                $tab = 'recommend';
+                return view('index', compact('items', 'tab'));
             }
         }
         else {
             if ($request->tab === 'mylist'){
                 $items = ($request->tab === 'mylist') ? collect() : Item::all();
+                $tab = 'mylist';
             }
             else {
                 $items = Item::all();
+                $tab = 'recommend';
             }
-            return view('index', compact('items'));
+            return view('index', compact('items', 'tab'));
         }
     }
 
